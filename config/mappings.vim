@@ -459,6 +459,7 @@ if dein#tap('telescope.nvim')
 	nnoremap <localleader>r <cmd>Telescope resume initial_mode=normal<CR>
 	nnoremap <localleader>R <cmd>Telescope pickers<CR>
 	nnoremap <localleader>f <cmd>Telescope find_files<CR>
+	nnoremap <localleader>F <cmd>Telescope find_files search_dirs=%:p:hsearch_dirs=%:p:h<CR>
 	nnoremap <localleader>g <cmd>Telescope live_grep<CR>
 	nnoremap <localleader>b <cmd>Telescope buffers<CR>
 	nnoremap <localleader>h <cmd>Telescope highlights<CR>
