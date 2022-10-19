@@ -88,7 +88,7 @@ local function make_config(server_name)
 	local c = {}
 	c.on_attach = on_attach
 	local cap = vim.lsp.protocol.make_client_capabilities()
-	c.capabilities = require('cmp_nvim_lsp').update_capabilities(cap)
+	c.capabilities = require('cmp_nvim_lsp').default_capabilities(cap)
 
 	-- Merge user-defined lsp settings.
 	-- These can be overridden locally by lua/lsp-local/<server_name>.lua

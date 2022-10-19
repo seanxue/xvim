@@ -136,8 +136,8 @@ xnoremap <Leader>k :move'<-2<CR>gv=gv
 xnoremap <Leader>j :move'>+<CR>gv=gv
 
 " Duplicate lines without affecting PRIMARY and CLIPBOARD selections.
-nnoremap <Leader>d m`""Y""P``
-xnoremap <Leader>d ""Y""Pgv
+nnoremap <Leader><Leader>d m`""Y""P``
+xnoremap <Leader><Leader>d ""Y""Pgv
 
 " Change current word in a repeatable manner
 nnoremap <Leader>cn *``cgn
@@ -315,11 +315,11 @@ nnoremap <C-x> <C-w>x
 nnoremap  [Window]   <Nop>
 nmap      s [Window]
 
-nnoremap [Window]b  <cmd>buffer#<CR>
-nnoremap [Window]c  <cmd>close<CR>
-nnoremap [Window]d  <cmd>bdelete<CR>
-nnoremap [Window]v  <cmd>split<CR>
-nnoremap [Window]g  <cmd>vsplit<CR>
+nnoremap <Leader>b  <cmd>buffer#<CR>
+nnoremap <Leader>c  <cmd>close<CR>
+nnoremap <Leader>d  <cmd>bdelete<CR>
+nnoremap [Window]h  <cmd>split<CR>
+nnoremap [Window]v  <cmd>vsplit<CR>
 nnoremap [Window]t  <cmd>tabnew<CR>
 nnoremap [Window]o  <cmd>only<CR>
 nnoremap [Window]q  <cmd>quit<CR>
@@ -327,11 +327,11 @@ nnoremap [Window]x  <cmd>call <SID>window_empty_buffer()<CR>
 nnoremap [Window]z  <cmd>call <SID>zoom()<CR>
 
 " Split current buffer, go to previous window and previous buffer
-nnoremap [Window]sv <cmd>split<CR>:wincmd p<CR>:e#<CR>
-nnoremap [Window]sg <cmd>vsplit<CR>:wincmd p<CR>:e#<CR>
+nnoremap [Window]sh <cmd>split<CR>:wincmd p<CR>:e#<CR>
+nnoremap [Window]sv <cmd>vsplit<CR>:wincmd p<CR>:e#<CR>
 
 " Background dark/light toggle
-nmap [Window]h <cmd>call <SID>toggle_background()<CR>
+"nmap [Window]h <cmd>call <SID>toggle_background()<CR>
 
 " }}}
 " Helper functions {{{
@@ -459,8 +459,9 @@ if dein#tap('telescope.nvim')
 	nnoremap <localleader>r <cmd>Telescope resume initial_mode=normal<CR>
 	nnoremap <localleader>R <cmd>Telescope pickers<CR>
 	nnoremap <localleader>f <cmd>Telescope find_files<CR>
-	nnoremap <localleader>F <cmd>Telescope find_files search_dirs=%:p:hsearch_dirs=%:p:h<CR>
+	nnoremap <localleader>F <cmd>Telescope find_files cwd=%:p:h<CR>
 	nnoremap <localleader>g <cmd>Telescope live_grep<CR>
+	nnoremap <localleader>G <cmd>Telescope live_grep cwd=%:p:h<CR>
 	nnoremap <localleader>b <cmd>Telescope buffers<CR>
 	nnoremap <localleader>h <cmd>Telescope highlights<CR>
 	nnoremap <localleader>j <cmd>Telescope jumplist<CR>
@@ -491,6 +492,7 @@ if dein#tap('telescope.nvim')
 	nnoremap <leader>gt <cmd>lua require('plugins.telescope').pickers.lsp_workspace_symbols_cursor()<CR>
 	nnoremap <leader>gf <cmd>lua require('plugins.telescope').pickers.find_files_cursor()<CR>
 	nnoremap <leader>gg <cmd>lua require('plugins.telescope').pickers.grep_string_cursor()<CR>
+	nnoremap <leader>Gg <cmd>lua require('plugins.telescope').pickers.grep_string_cursor_cwd()<CR>
 	xnoremap <leader>gg <cmd>lua require('plugins.telescope').pickers.grep_string_visual()<CR>
 
 	" LSP related
@@ -559,12 +561,6 @@ if dein#tap('vim-sandwich')
 	" xmap is <Plug>(textobj-sandwich-query-i)
 	" omap as <Plug>(textobj-sandwich-query-a)
 	" xmap as <Plug>(textobj-sandwich-query-a)
-endif
-
-if dein#tap('vim-niceblock')
-	silent! xmap I  <Plug>(niceblock-I)
-	silent! xmap gI <Plug>(niceblock-gI)
-	silent! xmap A  <Plug>(niceblock-A)
 endif
 
 if dein#tap('accelerated-jk')

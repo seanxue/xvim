@@ -42,7 +42,7 @@ local function config(server_config)
 	server_config.settings = settings
 
 	-- See https://github.com/folke/lua-dev.nvim
-	return require('lua-dev').setup({
+	return require('neodev').setup({
 		lspconfig = server_config,
 		library = {
 			vimruntime = true, -- runtime path

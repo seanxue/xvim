@@ -1,10 +1,24 @@
 -- gopls
 --
 local util = require("lspconfig/util")
+local lastRootPath = nil
+local gopath = os.getenv("GOPATH")
+if gopath == nil then
+  gopath = ""
+end
+local gopathmod = gopath..'/pkg/mod'
 
 local config = {
-  filetypes = { "go", "gomod" },
-  root_dir = util.root_pattern("go.work", "go.mod", ".git"),
+  -- filetypes = { "go", "gomod" },
+  -- root_dir = util.root_pattern("go.work", "go.mod", ".git"),
+  root_dir = function(fname)
+    local fullpath = vim.fn.expand(fname, ':p')
+    if string.find(fullpath, gopathmod) and lastRootPath ~= nil then
+      return lastRootPath
+    end
+    lastRootPath = util.root_pattern("go.mod", ".git")(fname)
+    return lastRootPath
+  end,
   settings = {
     -- https://github.com/golang/tools/blob/master/gopls/doc/settings.md
     gopls = {
@@ -53,7 +67,7 @@ vim.api.nvim_create_autocmd("BufWritePre", { pattern = { "*.go" }, callback = vi
 vim.api.nvim_create_autocmd("BufWritePre", { pattern = { "*.go" }, callback = org_imports })
 
 return {
-  config = function(_)
+  config = function()
     return config
   end,
 }

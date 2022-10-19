@@ -204,43 +204,6 @@ function! s:use_dein()
 	end
 endfunction
 
-function! s:use_plug() abort
-	" vim-plug package-manager initialization
-	let l:cache_root = $VIM_DATA_PATH . '/plug'
-	let l:cache_init = l:cache_root . '/init.vimplug'
-	let l:cache_repos = l:cache_root . '/repos'
-
-	augroup user_plugin_vimplug
-		autocmd!
-	augroup END
-
-	if &runtimepath !~# '/init.vimplug'
-
-		if ! isdirectory(l:cache_init)
-			silent !curl -fLo $VIM_DATA_PATH/plug/init.vimplug/autoload/plug.vim
-				\ --create-dirs
-				\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
-			autocmd user_plugin_vimplug VimEnter * PlugInstall --sync | source $MYVIMRC
-		endif
-
-		execute 'set runtimepath+='.substitute(
-			\ fnamemodify(l:cache_init, ':p') , '/$', '', '')
-	endif
-
-	let l:rc = s:parse_config_files()
-	if empty(l:rc)
-		call s:error('Empty plugin list')
-		return
-	endif
-
-	call plug#begin(l:cache_repos)
-	for plugin in l:rc
-		call plug#(plugin['repo'], extend(plugin, {}, 'keep'))
-	endfor
-	call plug#end()
-endfunction
-
 function! s:parse_config_files()
 	let l:merged = []
 	try

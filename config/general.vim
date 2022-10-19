@@ -13,15 +13,13 @@ set magic                    " For regular expressions turn magic on
 set path+=**                 " Directories to search when using gf and friends
 set isfname-==               " Remove =, detects filename in var=/foo/bar
 set virtualedit=block        " Position cursor anywhere in visual block
-set synmaxcol=2500           " Don't syntax highlight long lines
+set synmaxcol=5120           " Don't syntax highlight long lines
+set history=3000             " History and persistence
 
 if has('vim_starting')
 	set encoding=utf-8
 	scriptencoding utf-8
 endif
-
-" History and persistence
-set history=2000
 
 if has('nvim') && ! has('win32') && ! has('win64')
 	set shada='400,<20,@100,s10,f1,h,r/tmp,r/private/var
@@ -113,7 +111,7 @@ augroup END
 " Tabs and Indents {{{
 " ----------------
 set textwidth=80    " Text width maximum chars before wrapping
-set noexpandtab     " Don't expand tabs to spaces
+"set noexpandtab     " Don't expand tabs to spaces
 set tabstop=2       " The number of spaces a tab is
 set shiftwidth=2    " Number of spaces to use in auto(indent)
 set softtabstop=-1  " Automatically keeps in sync with shiftwidth
@@ -213,8 +211,8 @@ set noshowmode          " Don't show mode in cmd window
 set shortmess=aoOTI     " Shorten messages and don't show intro
 set scrolloff=2         " Keep at least 2 lines above/below
 set sidescrolloff=5     " Keep at least 5 lines left/right
-set nonumber            " Don't show line numbers
-set noruler             " Disable default status ruler
+"set nonumber            " Don't show line numbers
+"set noruler             " Disable default status ruler
 set list                " Show hidden characters
 
 set showtabline=2       " Always show the tabs line

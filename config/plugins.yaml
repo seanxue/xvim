@@ -18,7 +18,6 @@
 
 - repo: tpope/vim-sleuth
   hook_add: |-
-    let g:sleuth_no_filetype_indent_on = 1
     let g:sleuth_gitcommit_heuristics = 0
 
 - repo: sgur/vim-editorconfig
@@ -77,7 +76,7 @@
   if: has('nvim-0.5')
   on_cmd: Registers
   on_map: { i: '<C-r>', nx: '"' }
-  hook_source: let g:registers_window_border = 'rounded'
+  hook_source: lua require('registers').setup({window={border = 'rounded'}})
 
 - repo: rest-nvim/rest.nvim
   if: has('nvim-0.5')
@@ -113,10 +112,6 @@
   if: has('nvim-0.5')
   on_lua: spectre
   hook_post_source: lua require('plugins.spectre')
-
-- repo: kana/vim-niceblock
-  on_map: { x: <Plug> }
-  hook_add: let g:niceblock_no_default_key_mappings = 0
 
 - repo: t9md/vim-choosewin
   on_map: { n: <Plug> }
@@ -186,34 +181,38 @@
   on_event: FileType
   hook_post_source: lua require('plugins.marks')
 
-- repo: nathanaelkane/vim-indent-guides
-  on_event: FileType
-  hook_post_source: IndentGuidesEnable
-  hook_source: |-
-    let g:indent_guides_enable_on_vim_startup = 0
-    let g:indent_guides_default_mapping = 0
-    let g:indent_guides_tab_guides = 0
-    let g:indent_guides_color_change_percent = 3
-    let g:indent_guides_guide_size = 1
-    let g:indent_guides_exclude_filetypes = [
-      \ 'help', 'man', 'fern', 'defx', 'denite', 'denite-filter', 'startify',
-      \ 'vista', 'vista_kind', 'tagbar', 'lsp-hover', 'clap_input', 'fzf',
-      \ 'any-jump', 'gina-status', 'gina-commit', 'gina-log', 'minimap',
-      \ 'quickpick-filter', 'lsp-quickpick-filter', 'lspinfo'
-      \ ]
-    augroup user_plugin_indentguides
-      autocmd!
-      autocmd BufEnter *
-        \ if ! empty(&l:filetype) && empty(&buftype) && ! &previewwindow
-        \|   if g:indent_guides_autocmds_enabled == 0 && &l:expandtab
-        \|     IndentGuidesEnable
-        \|   elseif g:indent_guides_autocmds_enabled == 1 && ! &l:expandtab
-        \|     IndentGuidesDisable
-        \|   endif
-        \| elseif g:indent_guides_autocmds_enabled == 1
-        \|   IndentGuidesDisable
-        \| endif
-    augroup END
+- repo: lukas-reineke/indent-blankline.nvim
+  if: has('nvim-0.5')
+  hook_post_source: lua require('plugins.indent-blankline').setup()
+
+#- repo: nathanaelkane/vim-indent-guides
+#  on_event: FileType
+#  hook_post_source: IndentGuidesEnable
+#  hook_source: |-
+#    let g:indent_guides_enable_on_vim_startup = 0
+#    let g:indent_guides_default_mapping = 0
+#    let g:indent_guides_tab_guides = 0
+#    let g:indent_guides_color_change_percent = 3
+#    let g:indent_guides_guide_size = 1
+#    let g:indent_guides_exclude_filetypes = [
+#      \ 'help', 'man', 'fern', 'defx', 'denite', 'denite-filter', 'startify',
+#      \ 'vista', 'vista_kind', 'tagbar', 'lsp-hover', 'clap_input', 'fzf',
+#      \ 'any-jump', 'gina-status', 'gina-commit', 'gina-log', 'minimap',
+#      \ 'quickpick-filter', 'lsp-quickpick-filter', 'lspinfo'
+#      \ ]
+#    augroup user_plugin_indentguides
+#      autocmd!
+#      autocmd BufEnter *
+#        \ if ! empty(&l:filetype) && empty(&buftype) && ! &previewwindow
+#        \|   if g:indent_guides_autocmds_enabled == 0 && &l:expandtab
+#        \|     IndentGuidesEnable
+#        \|   elseif g:indent_guides_autocmds_enabled == 1 && ! &l:expandtab
+#        \|     IndentGuidesDisable
+#        \|   endif
+#        \| elseif g:indent_guides_autocmds_enabled == 1
+#        \|   IndentGuidesDisable
+#        \| endif
+#    augroup END
 
 - repo: kevinhwang91/nvim-bqf
   if: has('nvim-0.5')
@@ -308,7 +307,7 @@
 
 - { repo: hrsh7th/cmp-nvim-lsp, on_source: nvim-lspconfig }
 - { repo: kosayoda/nvim-lightbulb, on_source: nvim-lspconfig }
-- { repo: folke/lua-dev.nvim, on_source: nvim-lspconfig }
+- { repo: folke/neodev.nvim, on_source: nvim-lspconfig }
 
 - repo: ray-x/lsp_signature.nvim
   if: has('nvim-0.6.1')
@@ -543,5 +542,9 @@
 - repo: AndrewRadev/dsf.vim
   on_map: { n: <Plug>Dsf }
   hook_add: let g:dsf_no_mappings = 1
+
+- repo: iamcco/markdown-preview.nvim
+  on_ft: ['markdown', 'pandoc.markdown', 'rmd']
+  build: 'sh -c "cd app && yarn install"'
 
 #  vim: set ts=2 sw=2 tw=80 et :

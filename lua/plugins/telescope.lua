@@ -57,6 +57,13 @@ pickers.grep_string_cursor = function()
 	})
 end
 
+pickers.grep_string_cursor_cwd = function()
+	require'telescope.builtin'.live_grep({
+		default_text = vim.fn.expand('<cword>'),
+		cwd = vim.fn.expand('%:p:h'),
+	})
+end
+
 pickers.find_files_cursor = function()
 	require'telescope.builtin'.find_files({
 		default_text = vim.fn.expand('<cword>'),
