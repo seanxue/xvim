@@ -41,8 +41,8 @@ local settings = {
 	},
 }
 
-local function config()
-  return settings
+local function config(_)
+	return settings
 end
 
 return {
