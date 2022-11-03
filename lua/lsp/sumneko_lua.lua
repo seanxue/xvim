@@ -24,6 +24,9 @@ local settings = {
 		telemetry = {
 			enable = false,
 		},
+		completion = {
+			callSnippet = "Replace"
+		},
 		-- workspace = {
 		-- 	-- Make the server aware of Neovim runtime files
 		-- 	-- library = vim.api.nvim_get_runtime_file('', true),
@@ -38,18 +41,8 @@ local settings = {
 	},
 }
 
-local function config(server_config)
-	server_config.settings = settings
-
-	-- See https://github.com/folke/lua-dev.nvim
-	return require('neodev').setup({
-		lspconfig = server_config,
-		library = {
-			vimruntime = true, -- runtime path
-			types = true, -- full signature, docs and completion
-			plugins = false,
-		},
-	})
+local function config()
+  return settings
 end
 
 return {
