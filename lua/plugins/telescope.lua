@@ -35,12 +35,6 @@ function myactions.page_down(prompt_bufnr)
 	require('telescope.actions.set').shift_selection(prompt_bufnr, 5)
 end
 
-function myactions.change_directory(prompt_bufnr)
-	local entry = require('telescope.actions.state').get_selected_entry()
-	require('telescope.actions').close(prompt_bufnr)
-	vim.cmd('lcd ' .. entry.path)
-end
-
 -- Custom pickers
 
 local pickers = {}
@@ -86,6 +80,7 @@ pickers.zoxide = function()
 end
 
 pickers.plugin_directories = function(opts)
+	local actions = require('telescope.actions')
 	local utils = require('telescope.utils')
 	local dir = vim.fn.expand('$VIM_DATA_PATH/dein/repos/github.com')
 
@@ -102,7 +97,6 @@ pickers.plugin_directories = function(opts)
 			value = line,
 			ordinal = line,
 			display = line:sub(dir_len + 2),
-			path = line,
 		}
 	end
 
@@ -118,9 +112,12 @@ pickers.plugin_directories = function(opts)
 		},
 		sorter = require('telescope.sorters').get_fuzzy_file(),
 		previewer = require('telescope.previewers.term_previewer').cat.new(opts),
-		attach_mappings = function(_, map)
-			map('i', '<cr>', myactions.change_directory)
-			map('n', '<cr>', myactions.change_directory)
+		attach_mappings = function(prompt_bufnr)
+			actions.select_default:replace(function()
+				local entry = require('telescope.actions.state').get_selected_entry()
+				actions.close(prompt_bufnr)
+				vim.cmd.lcd(entry.value)
+			end)
 			return true
 		end
 	}):find()
@@ -396,7 +393,6 @@ local setup = function()
 						action = function(selection)
 							vim.cmd.lcd(selection.path)
 						end,
-						after_action = function(_) end,
 					},
 				},
 			},
@@ -409,6 +405,8 @@ local setup = function()
 	}
 
 	-- Telescope extensions are loaded in each plugin.
+	-- But the persisted plugin must be immediately.
+	telescope.load_extension('persisted')
 end
 
 -- Public functions
