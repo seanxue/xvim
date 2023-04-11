@@ -9,8 +9,7 @@ end
 local gopathmod = gopath..'/pkg/mod'
 
 local config = {
-  -- filetypes = { "go", "gomod" },
-  -- root_dir = util.root_pattern("go.work", "go.mod", ".git"),
+  filetypes = { "go", "gomod" },
   root_dir = function(fname)
     local fullpath = vim.fn.expand(fname, ':p')
     if string.find(fullpath, gopathmod) and lastRootPath ~= nil then
@@ -44,7 +43,7 @@ local config = {
 }
 
 local function org_imports()
-  local clients = vim.lsp.buf_get_clients()
+  local clients = vim.lsp.get_active_clients()
   for _, client in pairs(clients) do
     local params = vim.lsp.util.make_range_params(nil, client.offset_encoding)
     params.context = { only = { "source.organizeImports" } }
@@ -62,8 +61,7 @@ local function org_imports()
   end
 end
 
-vim.api.nvim_create_autocmd("BufWritePre", { pattern = { "*.go" }, callback = vim.lsp.buf.formatting })
-
+vim.api.nvim_create_autocmd("BufWritePre", { pattern = { "*.go" }, callback = vim.lsp.buf.format { async = true }})
 vim.api.nvim_create_autocmd("BufWritePre", { pattern = { "*.go" }, callback = org_imports })
 
 return {

@@ -19,7 +19,7 @@ local config = {
 					url = 'http://json.schemastore.org/eslintrc'
 				},
 				{
-					fileMatch = { '.golangci.json' },
+					fileMatch = { '.golangci.json', '.golangci.yml'},
 					url = 'http://json.schemastore.org/golangci-lint.json'
 				},
 				{
