@@ -468,9 +468,11 @@ if dein#tap('telescope.nvim')
 	nnoremap <localleader>b <cmd>Telescope buffers<CR>
 	nnoremap <localleader>h <cmd>Telescope highlights<CR>
 	nnoremap <localleader>j <cmd>Telescope jumplist<CR>
+	nnoremap <localleader>k <cmd>Telescope keymaps<CR>
 	nnoremap <localleader>m <cmd>Telescope marks<CR>
 	nnoremap <localleader>o <cmd>Telescope vim_options<CR>
-	nnoremap <localleader>t <cmd>Telescope lsp_dynamic_workspace_symbols<CR>
+	nnoremap <localleader>t <cmd>Telescope lsp_document_symbols<CR>
+	nnoremap <localleader>T <cmd>Telescope lsp_dynamic_workspace_symbols<CR>
 	nnoremap <localleader>v <cmd>Telescope registers<CR>
 	nnoremap <localleader>u <cmd>Telescope spell_suggest<CR>
 	nnoremap <localleader>s <cmd>Telescope persisted<CR>
@@ -495,7 +497,7 @@ if dein#tap('telescope.nvim')
 	nnoremap <leader>gt <cmd>lua require('plugins.telescope').pickers.lsp_workspace_symbols_cursor()<CR>
 	nnoremap <leader>gf <cmd>lua require('plugins.telescope').pickers.find_files_cursor()<CR>
 	nnoremap <leader>gg <cmd>lua require('plugins.telescope').pickers.grep_string_cursor()<CR>
-	nnoremap <leader>Gg <cmd>lua require('plugins.telescope').pickers.grep_string_cursor_cwd()<CR>
+	nnoremap <leader>gG <cmd>lua require('plugins.telescope').pickers.grep_string_cursor_cwd()<CR>
 	xnoremap <leader>gg <cmd>lua require('plugins.telescope').pickers.grep_string_visual()<CR>
 
 	" LSP related
@@ -653,6 +655,7 @@ endif
 
 if dein#tap('diffview.nvim')
 	nnoremap <Leader>gv <cmd>DiffviewOpen<CR>
+	nnoremap <Leader>gV <cmd>DiffviewClose<CR>
 endif
 
 if dein#tap('vimwiki')
