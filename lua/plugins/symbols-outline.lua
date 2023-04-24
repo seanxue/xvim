@@ -3,22 +3,27 @@
 -- rafi settings
 
 -- :h symbols-outline.txt
-require('symbols-outline').setup({
-	highlight_hovered_item = true,
-	show_guides = true,
-	auto_preview = false,
-	position = 'right',
-	width = 30,
-	keymaps = {
-		close = { '<Esc>', 'q' },
-		goto_location = '<CR>',
-		focus_location = 'o',
-		hover_symbol = 'K',
-		toggle_preview = 'p',
-		rename_symbol = 'r',
-		code_actions = 'a',
-	},
-	lsp_blacklist = {},
+require("symbols-outline").setup({
+  highlight_hovered_item = true,
+  show_guides = true,
+  auto_preview = false,
+  position = "right",
+  width = 30,
+  keymaps = {
+    close = { "<Esc>", "q" },
+    goto_location = "<CR>",
+    focus_location = "o",
+    hover_symbol = "K",
+    toggle_preview = "p",
+    rename_symbol = "r",
+    code_actions = "a",
+    fold = "h",
+    unfold = "l",
+    fold_all = "W",
+    unfold_all = "E",
+    fold_reset = "R",
+  },
+  lsp_blacklist = {},
 })
 
 vim.cmd([[
