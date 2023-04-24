@@ -36,6 +36,7 @@
 # --------
 
 - repo: nvim-neo-tree/neo-tree.nvim
+  rev: v2.x
   if: has('nvim-0.7')
   on_cmd: Neotree
   hook_post_source: lua require('plugins.neo-tree')
