@@ -9,6 +9,7 @@ require("symbols-outline").setup({
   auto_preview = false,
   position = "right",
   width = 30,
+  autofold_depth = 3,
   keymaps = {
     close = { "<Esc>", "q" },
     goto_location = "<CR>",
