@@ -776,6 +776,11 @@ if dein#tap('dsf.vim')
 	nmap csf <Plug>DsfChange
 endif
 
+if dein#tap('vim-floaterm')
+	xnoremap <Leader>sh <cmd>FloatermNew<CR>
+	nnoremap <Leader>sh <cmd>FloatermNew<CR>
+endif
+
 " }}}
 
 " vim: set foldmethod=marker ts=2 sw=2 tw=80 noet :

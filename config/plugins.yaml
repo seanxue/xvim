@@ -16,6 +16,8 @@
 - repo: christoomey/vim-tmux-navigator
   if: "! (has('win32') || has('win64'))"
 
+- { repo: voldikss/vim-floaterm }
+
 - repo: tpope/vim-sleuth
   hook_add: |-
     let g:sleuth_gitcommit_heuristics = 0
