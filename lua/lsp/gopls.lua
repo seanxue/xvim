@@ -6,43 +6,9 @@ local gopath = os.getenv("GOPATH")
 if gopath == nil then
   gopath = ""
 end
-local gopathmod = gopath..'/pkg/mod'
+local gopathmod = gopath .. "/pkg/mod"
 
-local config = {
-  filetypes = { "go", "gomod" },
-  root_dir = function(fname)
-    local fullpath = vim.fn.expand(fname, ':p')
-    if string.find(fullpath, gopathmod) and lastRootPath ~= nil then
-      return lastRootPath
-    end
-    lastRootPath = util.root_pattern("go.mod", ".git")(fname)
-    return lastRootPath
-  end,
-  settings = {
-    -- https://github.com/golang/tools/blob/master/gopls/doc/settings.md
-    gopls = {
-      staticcheck = true,
-      gofumpt = true,
-      linksInHover = true,
-
-      -- https://github.com/golang/tools/blob/master/gopls/doc/analyzers.md
-      analyses = {
-        fillreturns = true,
-        nonewvars = true,
-        undeclaredname = true,
-        unusedparams = false,
-        ST1000 = false,
-        ST1005 = false,
-      },
-    },
-  },
-  init_options = {
-    usePlaceholders = true,
-    completeUnimported = true,
-  },
-}
-
-local function org_imports()
+local function formatter()
   local clients = vim.lsp.get_active_clients()
   for _, client in pairs(clients) do
     local params = vim.lsp.util.make_range_params(nil, client.offset_encoding)
@@ -61,11 +27,44 @@ local function org_imports()
   end
 end
 
-vim.api.nvim_create_autocmd("BufWritePre", { pattern = { "*.go" }, callback = vim.lsp.buf.format { async = true }})
-vim.api.nvim_create_autocmd("BufWritePre", { pattern = { "*.go" }, callback = org_imports })
+local config = {
+  cmd = { "gopls" },
+  filetypes = { "go", "gomod" },
+  root_dir = function(fname)
+    local fullpath = vim.fn.fnamemodify(fname, ":p")
+    if lastRootPath ~= nil and string.find(fullpath, gopathmod) then
+      return lastRootPath
+    end
+    lastRootPath = util.root_pattern("go.mod", ".git")(fname)
+    return lastRootPath
+  end,
+  settings = {
+    -- https://github.com/golang/tools/blob/master/gopls/doc/settings.md
+    gopls = {
+      staticcheck = true,
+      gofumpt = true,
+      linksInHover = true,
+      -- https://github.com/golang/tools/blob/master/gopls/doc/analyzers.md
+      analyses = {
+        fillreturns = true,
+        nonewvars = true,
+        undeclaredname = true,
+        unusedparams = false,
+        ST1000 = false,
+        ST1005 = false,
+      },
+    },
+  },
+  init_options = {
+    usePlaceholders = true,
+    completeUnimported = true,
+  },
+  formatter = formatter,
+}
 
 return {
   config = function()
+    vim.api.nvim_create_autocmd("BufWritePre", { pattern = { "*.go" }, callback = formatter })
     return config
   end,
 }
