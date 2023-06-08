@@ -4,31 +4,32 @@
 -- Default completion kind symbols.
 local kind_presets = {
 	default = {
-		Text = '', --   𝓐
-		Method = '', --  ƒ
-		Function = '', -- 
-		Constructor = '', --   
-		Field = '', --  ﴲ ﰠ   
+		Text = '𝓐', --   𝓐
+		Method = 'ƒ', --  ƒ
+		Function = '', -- 
+		Constructor = '', --   
+		Field = '', --  ﴲ ﰠ   
 		Variable = '', --   
-		Class = '', --  ﴯ 𝓒
+		Class = '𝓒', --  ﴯ 𝓒
 		Interface = '', -- ﰮ    
-		Module = '', --   
-		Property = '襁', -- ﰠ 襁
+		Module = '', --   
+		Property = '', -- ﰠ 襁
 		Unit = '', --  塞
 		Value = '',
-		Enum = '練', -- 練 ℰ 
-		Keyword = '', --   🔐
-		Snippet = '⮡', -- ﬌  ⮡ 
+		Enum = 'ℰ', -- 練 ℰ 
+		Keyword = '🔐', --   🔐
+		Snippet = '', -- ﬌  ⮡ 
 		Color = '',
-		File = '', --  
-		Reference = '', --  
+		File = '', --  
+		Reference = '', --  
 		Folder = '', --  
 		EnumMember = '',
 		Constant = '', --  
-		Struct = '', --   𝓢 פּ
+		Struct = '𝓢', --   𝓢 פּ
 		Event = '', --  🗲
-		Operator = '', --   +
-		TypeParameter = '', --  𝙏
+		Operator = '+', --   +
+		TypeParameter = '𝙏', --  𝙏
+    Namespace = '',  --   
 	},
 }
 

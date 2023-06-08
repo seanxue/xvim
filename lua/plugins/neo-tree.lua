@@ -183,6 +183,9 @@ require('neo-tree').setup({
 				'.DS_Store',
 				'thumbs.db',
 			},
+      always_show = {
+        '.gitconfig',
+      },
 			-- remains hidden even if visible is toggled to true
 			never_show = {},
 		},
