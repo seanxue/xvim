@@ -17,6 +17,9 @@
   if: "! (has('win32') || has('win64'))"
 
 - { repo: voldikss/vim-floaterm }
+- { repo: tpope/vim-fugitive }
+- repo: tpope/vim-rhubarb
+  depends: vim-fugitive
 
 - repo: tpope/vim-sleuth
   hook_add: |-
@@ -380,6 +383,11 @@
   depends: telescope.nvim
   on_lua: telescope
   hook_post_source: lua require('telescope').load_extension('zoxide')
+
+- repo: aaronhallaert/advanced-git-search.nvim
+  depends: [ telescope.nvim, vim-fugitive, vim-rhubarb]
+  on_lua: telescope
+  hook_post_source: lua require('telescope').load_extension('advanced_git_search')
 
 - repo: simrat39/symbols-outline.nvim
   if: has('nvim-0.7')
