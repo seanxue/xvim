@@ -29,7 +29,7 @@ local kind_presets = {
 		Event = '', --  🗲
 		Operator = '+', --   +
 		TypeParameter = '𝙏', --  𝙏
-    Namespace = '',  --   
+    -- Namespace = '',  --   
 	},
 }
 
