@@ -2,41 +2,94 @@
 -- see: https://github.com/lewis6991/gitsigns.nvim
 -- rafi settings
 
-require('gitsigns').setup({
-	signcolumn = true,  -- Toggle with `:Gitsigns toggle_signs`
-	numhl      = false, -- Toggle with `:Gitsigns toggle_numhl`
-	linehl     = false, -- Toggle with `:Gitsigns toggle_linehl`
-	word_diff  = false, -- Toggle with `:Gitsigns toggle_word_diff`
+require("gitsigns").setup({
+	signs = {
+		add = { text = "│" },
+		change = { text = "│" },
+		delete = { text = "_" },
+		topdelete = { text = "‾" },
+		changedelete = { text = "~" },
+		untracked = { text = "┆" },
+	},
+	signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
+	numhl = false,     -- Toggle with `:Gitsigns toggle_numhl`
+	linehl = false,    -- Toggle with `:Gitsigns toggle_linehl`
+	word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
 	watch_gitdir = {
 		interval = 1000,
-		follow_files = true
+		follow_files = true,
 	},
 	attach_to_untracked = true,
-	current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
+	current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
+	current_line_blame_opts = {
+		virt_text = true,
+		virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
+		delay = 1000,
+		ignore_whitespace = true,
+	},
+	current_line_blame_formatter = "<author>, <author_time:%Y-%m-%d> - <summary>",
+	sign_priority = 6,
+	update_debounce = 100,
+	status_formatter = nil,  -- Use default
+	max_file_length = 40000, -- Disable if file is longer than this (in lines)
 	preview_config = {
-		border = 'rounded',
+		-- Options passed to nvim_open_win
+		border = "single",
+		style = "minimal",
+		relative = "cursor",
+		row = 0,
+		col = 1,
 	},
-	keymaps = {
-		noremap = true,
-
-		['n ]g'] = { expr = true, "&diff ? ']c' : '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>'"},
-		['n [g'] = { expr = true, "&diff ? '[c' : '<cmd>lua require\"gitsigns.actions\".prev_hunk()<CR>'"},
-
-		['n <leader>hs'] = '<cmd>lua require"gitsigns".stage_hunk()<CR>',
-		['x <leader>hs'] = '<cmd>lua require"gitsigns".stage_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
-		['n <leader>hu'] = '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
-		['n <leader>hr'] = '<cmd>lua require"gitsigns".reset_hunk()<CR>',
-		['x <leader>hr'] = '<cmd>lua require"gitsigns".reset_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
-		['n <leader>hR'] = '<cmd>lua require"gitsigns".reset_buffer()<CR>',
-		['n <leader>hd'] = '<cmd>lua require"gitsigns".toggle_deleted()<CR>',
-		['n <leader>hw'] = '<cmd>lua require"gitsigns".toggle_word_diff()<CR>',
-		['n <leader>hp'] = '<cmd>lua require"gitsigns".preview_hunk_inline()<CR>',
-		['n gs']         = '<cmd>lua require"gitsigns".preview_hunk()<CR>',
-		['n <leader>hb'] = '<cmd>lua require"gitsigns".blame_line({full=true})<CR>',
-		['n <leader>hl'] = '<cmd>lua require("user").githunk.publish_loclist(true)<CR>',
-
-		-- Text objects
-		['o ih'] = ':<C-U>Gitsigns select_hunk<CR>',
-		['x ih'] = ':<C-U>Gitsigns select_hunk<CR>'
+	yadm = {
+		enable = false,
 	},
+	on_attach = function(bufnr)
+		local gs = package.loaded.gitsigns
+
+		local function map(mode, l, r, opts)
+			opts = opts or {}
+			opts.buffer = bufnr
+			vim.keymap.set(mode, l, r, opts)
+		end
+
+		-- Navigation
+		map("n", "]c", function()
+			if vim.wo.diff then
+				return "]c"
+			end
+			vim.schedule(function()
+				gs.next_hunk()
+			end)
+			return "<Ignore>"
+		end, { expr = true })
+
+		map("n", "[c", function()
+			if vim.wo.diff then
+				return "[c"
+			end
+			vim.schedule(function()
+				gs.prev_hunk()
+			end)
+			return "<Ignore>"
+		end, { expr = true })
+
+		-- Actions
+		map("n", "<leader>hs", gs.stage_hunk)
+		map("v", "<leader>hs", function() gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") }) end)
+		map("n", "<leader>hr", gs.reset_hunk)
+		map("v", "<leader>hr", function() gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") }) end)
+		map("n", "<leader>hS", gs.stage_buffer)
+		map("n", "<leader>hu", gs.undo_stage_hunk)
+		map("n", "<leader>hR", gs.reset_buffer)
+		map("n", "<leader>hp", gs.preview_hunk)
+		map("n", "<leader>tb", gs.toggle_current_line_blame)
+		map("n", "<leader>hd", gs.diffthis)
+		map("n", "<leader>hD", function() gs.diffthis("~") end)
+		map("n", "<leader>td", gs.toggle_deleted)
+		map("n", "<leader>hw", gs.toggle_word_diff)
+		map("n", "<leader>hb", function() gs.blame_line({ full = true }) end)
+
+		-- Text object
+		map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
+	end,
 })

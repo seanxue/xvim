@@ -99,6 +99,7 @@ local function make_config(server_name)
 	local c = {}
 	c.on_attach = on_attach
 	local capabilities = require("cmp_nvim_lsp").default_capabilities()
+	capabilities.offsetEncoding = "utf-8"
 	c.capabilities = capabilities
 
 	-- Merge user-defined lsp settings.
