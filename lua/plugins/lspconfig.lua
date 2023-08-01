@@ -192,7 +192,7 @@ local function setup()
 	nmap("]d", "<cmd>lua vim.diagnostic.goto_next()<CR>")
 
 	-- See https://github.com/kosayoda/nvim-lightbulb
-	require("nvim-lightbulb").setup({ ignore = { "null-ls" } })
+	require("nvim-lightbulb").setup({ clients = { "null-ls" }, ft = { "neo-tree" } })
 
 	vim.api.nvim_exec(
 		[[
