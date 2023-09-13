@@ -33,6 +33,7 @@ return {
 		event = 'VimEnter',
 		priority = 1000,
 		opts = {
+			save_dir = vim.fn.expand(vim.fn.stdpath("data") .. "/sessions/"),
 			autoload = true,
 			follow_cwd = false,
 			ignored_dirs = { '/usr', '/opt', '~/.cache', vim.env.TMPDIR or '/tmp' },

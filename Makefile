@@ -26,12 +26,12 @@ uninstall:
 	-rm -rf "$(XDG_CACHE_HOME)"/nvim/venv
 
 venv:
-ifeq (, $(shell which pyenv-virtualenv))
-	python3 -m venv "$(XDG_CACHE_HOME)/nvim/venv" || true
-else
-	pyenv virtualenv neovim || true
-	ln -fs "$(shell pyenv prefix neovim)" "$(XDG_CACHE_HOME)/nvim/venv"
-endif
+	ifeq (, $(shell which pyenv-virtualenv))
+		python3 -m venv "$(XDG_CACHE_HOME)/nvim/venv" || true
+	else
+		pyenv virtualenv neovim || true
+		ln -fs "$(shell pyenv prefix neovim)" "$(XDG_CACHE_HOME)/nvim/venv"
+	endif
 	"$(XDG_CACHE_HOME)/nvim/venv/bin/pip" install -U pip
 	"$(XDG_CACHE_HOME)/nvim/venv/bin/pip" install -U pynvim
 

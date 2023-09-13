@@ -10,18 +10,45 @@ return {
 		-- See: https://github.com/lewis6991/gitsigns.nvim#usage
 		-- stylua: ignore
 		opts = {
+			signs = {
+				add = { text = "│" },
+				change = { text = "│" },
+				delete = { text = "_" },
+				topdelete = { text = "‾" },
+				changedelete = { text = "~" },
+				untracked = { text = "┆" },
+			},
 			signcolumn = true,  -- Toggle with `:Gitsigns toggle_signs`
 			numhl      = false, -- Toggle with `:Gitsigns toggle_numhl`
 			linehl     = false, -- Toggle with `:Gitsigns toggle_linehl`
 			word_diff  = false, -- Toggle with `:Gitsigns toggle_word_diff`
-			current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
+			current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
+			current_line_blame_opts = {
+				virt_text = true,
+				virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
+				delay = 1000,
+				ignore_whitespace = true,
+			},
+			current_line_blame_formatter = "<author>, <author_time:%Y-%m-%d> - <summary>",
+			sign_priority = 6,
+			update_debounce = 100,
+			status_formatter = nil,  -- Use default
+			max_file_length = 40000, -- Disable if file is longer than this (in lines)
 			attach_to_untracked = true,
 			watch_gitdir = {
 				interval = 1000,
 				follow_files = true,
 			},
 			preview_config = {
-				border = 'rounded',
+				-- Options passed to nvim_open_win
+				border = "single",
+				style = "minimal",
+				relative = "cursor",
+				row = 0,
+				col = 1,
+			},
+			yadm = {
+				enable = false,
 			},
 			on_attach = function(bufnr)
 				local gs = package.loaded.gitsigns
@@ -83,6 +110,7 @@ return {
 		keys = {
 			{ '<Leader>gd', '<cmd>DiffviewFileHistory<CR>', desc = 'Diff File' },
 			{ '<Leader>gv', '<cmd>DiffviewOpen<CR>', desc = 'Diff View' },
+			{ '<Leader>gV', '<cmd>DiffviewClose<CR>', desc = 'Diff View' },
 		},
 		opts = function()
 			local actions = require('diffview.actions')

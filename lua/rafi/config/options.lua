@@ -137,7 +137,7 @@ opt.showmode = false    -- Don't show mode in cmd window
 opt.scrolloff = 2       -- Keep at least 2 lines above/below
 opt.sidescrolloff = 5   -- Keep at least 5 lines left/right
 opt.numberwidth = 2     -- Minimum number of columns to use for the line number
-opt.number = false      -- Don't show line numbers
+opt.number = true       -- Don't show line numbers
 opt.ruler = false       -- Disable default status ruler
 opt.list = true         -- Show hidden characters
 

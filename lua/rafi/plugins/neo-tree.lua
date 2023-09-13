@@ -223,6 +223,7 @@ return {
 					'.stversions',
 				},
 				never_show = {},
+				always_show = { '.gitconfig'},
 			},
 		},
 		buffers = {

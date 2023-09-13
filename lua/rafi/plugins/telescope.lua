@@ -146,6 +146,7 @@ return {
 		commit = vim.fn.has('nvim-0.9') == 0 and '057ee0f8783' or nil,
 		dependencies = {
 			'nvim-lua/plenary.nvim',
+			'nvim-telescope/telescope-fzf-native.nvim',
 			'jvgrootveld/telescope-zoxide',
 			'folke/todo-comments.nvim',
 			'rafi/telescope-thesaurus.nvim',
@@ -153,6 +154,7 @@ return {
 		config = function(_, opts)
 			require('telescope').setup(opts)
 			require('telescope').load_extension('persisted')
+			require('telescope').load_extension('fzf')
 		end,
 		-- stylua: ignore
 		keys = {
@@ -160,13 +162,18 @@ return {
 			{ '<localleader>r', '<cmd>Telescope resume initial_mode=normal<CR>', desc = 'Resume last' },
 			{ '<localleader>R', '<cmd>Telescope pickers<CR>', desc = 'Pickers' },
 			{ '<localleader>f', '<cmd>Telescope find_files<CR>', desc = 'Find files' },
-			{ '<localleader>g', '<cmd>Telescope live_grep<CR>', desc = 'Grep' },
+			{ '<localleader>F', '<cmd>Telescope find_files cwd=%:p:h<CR>', desc = 'Find files in CWD' },
+			-- { '<localleader>g', '<cmd>Telescope live_grep<CR>', desc = 'Grep' },
+			{ '<localleader>g', '<cmd>Telescope grep_string search="" only_sort_text=true path_display={"shorten"}<CR>', desc = 'Grep' },
+			-- { '<localleader>G', '<cmd>Telescope live_grep cwd=%:p:h<CR>', desc = 'Grep in CWD' },
+			{ '<localleader>G', '<cmd>Telescope grep_string cwd=%:p:h search="" only_sort_text=true path_display={"shorten"}<CR>', desc = 'Grep' },
 			{ '<localleader>b', '<cmd>Telescope buffers show_all_buffers=true<CR>', desc = 'Buffers' },
 			{ '<localleader>h', '<cmd>Telescope highlights<CR>', desc = 'Highlights' },
 			{ '<localleader>j', '<cmd>Telescope jumplist<CR>', desc = 'Jump list' },
 			{ '<localleader>m', '<cmd>Telescope marks<CR>', desc = 'Marks' },
 			{ '<localleader>o', '<cmd>Telescope vim_options<CR>', desc = 'Neovim options' },
-			{ '<localleader>t', '<cmd>Telescope lsp_dynamic_workspace_symbols<CR>', desc = 'Workspace symbols' },
+			{ '<localleader>t', '<cmd>Telescope lsp_document_symbols<CR>', desc = 'Document symbols' },
+			{ '<localleader>T', '<cmd>Telescope lsp_dynamic_workspace_symbols<CR>', desc = 'Workspace symbols' },
 			{ '<localleader>v', '<cmd>Telescope registers<CR>', desc = 'Registers' },
 			{ '<localleader>u', '<cmd>Telescope spell_suggest<CR>', desc = 'Spell suggest' },
 			{ '<localleader>s', '<cmd>Telescope persisted<CR>', desc = 'Sessions' },
@@ -241,8 +248,8 @@ return {
 			{ '<leader>gc', '<cmd>Telescope git_bcommits_range<CR>', mode = { 'x', 'n' }, desc = 'Git bcommits range' },
 
 			-- Plugins
-			{ '<localleader>n', plugin_directories, desc = 'Plugins' },
 			{ '<localleader>k', '<cmd>Telescope thesaurus lookup<CR>', desc = 'Thesaurus' },
+			{ '<localleader>n', plugin_directories, desc = 'Plugins' },
 			{ '<localleader>w', '<cmd>ZkNotes<CR>', desc = 'Zk notes' },
 
 			{
@@ -283,10 +290,30 @@ return {
 				desc = 'Grep cursor word',
 			},
 			{
+				'<leader>Gg', function()
+					require('telescope.builtin').live_grep({
+						default_text = vim.fn.expand('<cword>'),
+						cwd = vim.fn.expand("%:p:h")
+					})
+				end,
+				desc = 'Grep cursor word in file dir',
+			},
+			{
 				'<leader>gg',
 				function()
 					require('telescope.builtin').live_grep({
 						default_text = require('rafi.lib.edit').get_visual_selection(),
+					})
+				end,
+				mode = 'x',
+				desc = 'Grep cursor word',
+			},
+			{
+				'<leader>Gg',
+				function()
+					require('telescope.builtin').live_grep({
+						default_text = require('rafi.lib.edit').get_visual_selection(),
+						cwd = vim.fn.expand("%:p:h")
 					})
 				end,
 				mode = 'x',
@@ -505,8 +532,19 @@ return {
 							},
 						},
 					},
+					fzf = {
+						fuzzy = true,                    -- false will only do exact matching
+						override_generic_sorter = true,  -- override the generic sorter
+						override_file_sorter = true,     -- override the file sorter
+						case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
+																						 -- the default case_mode is "smart_case"
+					}
 				},
 			}
 		end,
+	},
+	{
+		'nvim-telescope/telescope-fzf-native.nvim',
+		build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
 	},
 }

@@ -99,7 +99,7 @@ return {
 						if client.name == 'gopls' then
 							if not client.server_capabilities.semanticTokensProvider then
 								local semantic =
-									client.config.capabilities.textDocument.semanticTokens
+										client.config.capabilities.textDocument.semanticTokens
 								if semantic ~= nil then
 									client.server_capabilities.semanticTokensProvider = {
 										full = true,

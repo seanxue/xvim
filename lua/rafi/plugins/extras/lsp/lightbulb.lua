@@ -5,6 +5,7 @@ return {
 		opts = {
 			ignore = {
 				clients = { 'null-ls' },
+				ft = { "neo-tree" },
 			},
 		},
 		config = function(_, opts)
