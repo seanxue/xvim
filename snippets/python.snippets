@@ -1,0 +1,116 @@
+# snippets for sean
+global !p
+
+def table_to_orm_class(table_name):
+	return ""
+
+endglobal
+
+snippet ptrace "set pdb trace"
+import pdb; pdb.set_trace()
+endsnippet
+
+snippet ihdl "import handler base" b
+from cmd_handler_base import CmdHandlerBase
+
+
+${0}
+endsnippet
+
+snippet hdl "cmd handler class"
+class ${1:cmd}Handler(CmdHandlerBase):
+	def check_input(self, message):
+		${2}
+
+		# check input
+		${3}# req = message.raw_body
+
+		message.result = "SUCCESS"
+
+	def handle_input(self, message):
+		req = message.raw_body
+
+		# handle input
+		${0}
+		message.result = "SUCCESS"
+endsnippet
+
+snippet dbo "database operation"
+db_session = context.get_db_session(message.aid)
+try:
+	${1/.*/\u$0/} = context.get_table_class("${1:table}", message.aid)
+	orm = OrmHelper(message.header, ${1/.*/\u$0/}, db_session)
+	${0}
+except Exception as e:
+	db_session.rollback()
+	log.error("db operator get exception: %s" % e)
+	message.result = "FAILED"
+	return
+finally:
+	db_session.close()
+endsnippet
+
+snippet cuid "check uid"
+if len(message.uid) == 0:
+	message.result = "INVALID_PARAMETER"
+	message.errinfo = "missing uid"
+	return
+${0}
+endsnippet
+
+snippet crqr "check required field for input"
+required_fields = [${1}]
+if False == message.check_required_field(required_fields):
+	return
+endsnippet
+
+snippet rpc "make a rpc"
+# build $1 rpc agent
+${1:name}_cmd = "${2:cmd}"
+$1_body = {${3}}
+rpc_$1 = PbRpcAgent(
+	$1_cmd,
+	message,
+	body=$1_body
+)
+rpc_$1.invoke()
+
+# check $1 rpc result
+if rpc_$1.errcode != 0:
+	message.code = rpc_$1.errcode
+	message.errinfo = rpc_$1.errinfo
+	message.prompt = rpc_$1.prompt
+	return
+
+${0}# handle $1 response
+endsnippet
+
+snippet redis "redis access"
+try:
+	redis = context.get_redis()
+	${0}
+except Exception as e:
+	log.error("access redis get exception: %s" % e)
+	message.result = "FAILED"
+	return
+endsnippet
+
+snippet bt "log back trace log"
+import traceback
+log.debug(traceback.format_exc())
+endsnippet
+
+snippet ret "setup error result for message and return"
+errinfo = "${1}"
+log.error(errinfo)
+
+message.result = "${2}"
+message.errinfo = errinfo
+return${0}
+endsnippet
+
+snippet dbu "set database field updates map"
+if req.HasField("${1:pb_field}"):
+	updates["${1/[^_]+_(.*)/$1/}"] = req.$1
+$0
+endsnippet

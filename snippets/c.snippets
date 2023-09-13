@@ -1,0 +1,25 @@
+snippet guard "Include header once only guard"
+#ifndef ${1:`!p
+if not snip.c:
+	import string
+	name = ''
+	path = vim.eval('expand("%:p")')
+	dirs = path.split('/')
+	i = len(dirs) - 1
+	while 0 <= i:
+		if dirs[i] == 'include':
+			name = dirs[i-1] + '_' + name
+			break
+		name = dirs[i] + '_' + name
+		i = i - 1
+	name = re.sub(r'[^A-Za-z0-9]+','_', name)
+	snip.rv = name.upper()
+else:
+	snip.rv = snip.c`}
+#define $1
+
+${VISUAL}$0
+
+#endif /* $1 */
+endsnippet
+

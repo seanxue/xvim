@@ -1,0 +1,83 @@
+priority -50
+
+snippet pb3
+syntax = "proto3";
+$0
+endsnippet
+
+snippet enm "Enumeration" b
+// ${2:TODO(`whoami`): Describe this enum.}
+enum ${1:Name}
+{
+	$0
+};
+endsnippet
+
+snippet msg "Proto message" b
+// ${2:TODO(`whoami`): Describe this message.}
+message ${1:Name}
+{
+	$0
+};
+endsnippet
+
+snippet api "define api req and rsp message"
+// ${2:TODO(`whoami`): Describe this API.}
+message ${1:cmd}Req
+{
+	${3:TODO(`whoami`) define request body}
+};
+
+message $1Rsp
+{
+	${0:TODO(`whoami`) define response body}
+};
+endsnippet
+
+snippet d "new double field"
+optional double double_${1:field} = ${2:index};  // ${0:comment}
+endsnippet
+
+snippet ui "new uint32 field"
+optional uint32 uint32_${1:field} = ${2:index};  // ${0:comment}
+endsnippet
+
+snippet ui64 "new uint32 field"
+optional uint64 uint64_${1:field} = ${2:index};  // ${0:comment}
+endsnippet
+
+snippet str "new string field"
+optional string str_${1:field} = ${2:index};  // ${0:comment}
+endsnippet
+
+snippet b "new bytes field"
+optional bytes bytes_${1:field} = ${2:index};  // ${0:comment}
+endsnippet
+
+snippet m "new msg field"
+optional ${1:type} msg_${2:field} = ${3:index};  // ${0:comment}
+endsnippet
+
+snippet ds "new repeated double field"
+repeated double rpt_double_${1:field} = ${2:index};  // ${0:comment}
+endsnippet
+
+snippet uis "new repeated uint32 field"
+repeated uint32 rpt_uint32_${1:field} = ${2:index};  // ${0:comment}
+endsnippet
+
+snippet ui64s "new repeated uint32 field"
+repeated uint64 rpt_uint64_${1:field} = ${2:index};  // ${0:comment}
+endsnippet
+
+snippet strs "new repeated string field"
+repeated string rpt_str_${1:field} = ${2:index};  // ${0:comment}
+endsnippet
+
+snippet bs "new repeated bytes field"
+repeated bytes rpt_bytes_${1:field} = ${2:index};  // ${0:comment}
+endsnippet
+
+snippet ms "new repeated msg field"
+repeated ${1:type} rpt_msg_${2:field} = ${3:index};  // ${0:comment}
+endsnippet

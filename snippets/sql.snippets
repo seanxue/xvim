@@ -1,0 +1,61 @@
+# snippets for sean
+snippet ndb "create new database"
+DROP DATABASE IF EXISTS \`${1:database name}\`;
+CREATE DATABASE \`$1\` CHARACTER SET UTF8;
+
+${0}
+endsnippet
+
+
+snippet t "define a table"
+CREATE TABLE IF NOT EXISTS \`${1:table name}\` (
+    ${0:columns}
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='${2:comment}';
+endsnippet
+
+snippet nt "define a table with drop"
+DROP TABLE IF EXISTS \`${1:table name}\`;
+CREATE TABLE IF NOT EXISTS \`$1\` (
+    \`id\` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'id',
+    \`create_time\` INT(11) NOT NULL COMMENT '创建时间',
+    \`update_time\` INT(11) NOT NULL COMMENT '更新时间',
+    ${0:columns}
+    PRIMARY KEY (\`id\`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='${2:comment}';
+endsnippet
+
+snippet ai "auto increment column"
+\`${1:id}\` INT(${2:10}) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '${0:comment}',
+endsnippet
+
+snippet ic "int column"
+\`${1:name}\` INT(${2:11}) ${3:NOT NULL} COMMENT '${0:comment}',
+endsnippet
+
+snippet uic "unsigned int column"
+\`${1:name}\` INT(${2:10}) UNSIGNED ${3:NOT NULL} COMMENT '${0:comment}',
+endsnippet
+
+snippet tic "tiny int colomn"
+\`${1:name}\` TINYINT ${3:NOT NULL} COMMENT '${0:comment}',
+endsnippet
+
+snippet sic "small int colomn"
+\`${1:name}\` SMALLINT ${3:NOT NULL} COMMENT '${0:comment}',
+endsnippet
+
+snippet sc "string colomn"
+\`${1:name}\` VARCHAR(${2:255}) ${3:NOT NULL} COMMENT '${0:comment}',
+endsnippet
+
+snippet tc "text colomn"
+\`${1:name}\` TEXT ${2:NOT NULL} COMMENT '${0:comment}',
+endsnippet
+
+snippet dc "double colomn"
+\`${1:name}\` DOUBLE(${2:16},${3:4}) ${4:NOT NULL} COMMENT '${0:comment}',
+endsnippet
+
+snippet bc "blob colomn"
+\`${1:name}\` BLOB COMMENT '${0:comment}',
+endsnippet
