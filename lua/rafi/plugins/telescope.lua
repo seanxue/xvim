@@ -337,7 +337,6 @@ return {
 			}
 			table.insert(vimgrep_args, '--hidden')
 			table.insert(vimgrep_args, '--follow')
-			table.insert(vimgrep_args, '--no-ignore-vcs')
 			table.insert(vimgrep_args, '--glob')
 			table.insert(vimgrep_args, '!**/.git/*')
 
@@ -347,7 +346,6 @@ return {
 				'--files',
 				'--follow',
 				'--hidden',
-				'--no-ignore-vcs',
 				'--smart-case',
 				'--glob',
 				'!**/.git/*',
