@@ -9,6 +9,7 @@ return {
 		'jose-elias-alvarez/null-ls.nvim',
 		optional = true,
 		opts = function(_, opts)
+			opts.sources = opts.sources or {}
 			local nls = require('null-ls')
 			local source = nls.builtins.diagnostics.proselint.with({
 				diagnostics_postprocess = function(diagnostic)

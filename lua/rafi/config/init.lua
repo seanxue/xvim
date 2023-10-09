@@ -4,7 +4,7 @@
 -- This is part of LazyVim's code, with my modifications.
 -- See: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/init.lua
 
----@type RafiConfig
+---@class RafiConfig
 local M = {}
 
 M.lazy_version = '>=9.1.0'
@@ -28,7 +28,7 @@ local defaults = {
 	colorscheme = '',
 
 	features = {
-		elite_mode = false,
+		elite_mode = true,
 		window_q_mapping = true,
 	},
 
@@ -160,19 +160,22 @@ function M.setup(user_opts)
 	M.load('keymaps')
 
 	-- Set colorscheme
-	require('lazy.core.util').try(function()
-		if type(M.colorscheme) == 'function' then
-			M.colorscheme()
-		elseif #M.colorscheme > 0 then
-			vim.cmd.colorscheme(M.colorscheme)
-		end
-	end, {
-		msg = 'Could not load your colorscheme',
-		on_error = function(msg)
-			require('lazy.core.util').error(msg)
-			vim.cmd.colorscheme('habamax')
+	require('lazy.core.util').try(
+		function()
+			if type(M.colorscheme) == 'function' then
+				M.colorscheme()
+			elseif #M.colorscheme > 0 then
+				vim.cmd.colorscheme(M.colorscheme)
+			end
 		end,
-	})
+		{
+			msg = 'Could not load your colorscheme',
+			on_error = function(msg)
+				require('lazy.core.util').error(msg)
+				vim.cmd.colorscheme('habamax')
+			end,
+		}
+	)
 end
 
 ---@return table

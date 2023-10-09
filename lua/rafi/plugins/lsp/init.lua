@@ -1,8 +1,12 @@
 -- LSP: Plugins
+--
 -- https://github.com/rafi/vim-config
 
 -- This is part of LazyVim's code, with my modifications.
 -- See: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/plugins/lsp/init.lua
+
+vim.lsp.set_log_level('off')
+-- vim.lsp.set_log_level('TRACE')
 
 return {
 
@@ -243,6 +247,7 @@ return {
 		build = ':MasonUpdate',
 		keys = { { '<leader>mm', '<cmd>Mason<cr>', desc = 'Mason' } },
 		opts = {
+			log_level = vim.log.levels.ERROR,
 			ensure_installed = {},
 			ui = {
 				border = 'rounded',

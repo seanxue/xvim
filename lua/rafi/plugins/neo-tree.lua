@@ -1,7 +1,7 @@
 -- Plugin: Neo-tree
 -- https://github.com/rafi/vim-config
 
-local winwidth = 30
+local winwidth = 36
 
 -- Toggle width.
 local toggle_width = function()
@@ -165,7 +165,7 @@ return {
 					config = { use_float = true },
 				},
 
-				['w'] = toggle_width,
+				['W'] = toggle_width,
 			},
 		},
 		filesystem = {

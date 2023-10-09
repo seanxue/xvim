@@ -350,7 +350,7 @@ map('n', 'sx', function()
 end, { desc = 'Delete buffer and open new' })
 
 -- Background dark/light toggle
-map('n', '<leader>tc', function()
+map('n', '<leader>sc', function()
 	if vim.o.background == 'dark' then
 		vim.o.background = 'light'
 	else

@@ -45,6 +45,7 @@ return {
 							usePlaceholders = true,
 							completeUnimported = true,
 							staticcheck = true,
+							allowModfileModifications = true,
 							directoryFilters = {
 								'-.git',
 								'-.vscode',

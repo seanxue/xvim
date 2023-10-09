@@ -199,7 +199,7 @@ opt.fillchars = {
 
 opt.foldlevel = 99
 opt.foldlevelstart = 99
-opt.foldcolumn = '0'
+opt.foldcolumn = '1'
 opt.foldenable = true
 
 -- Misc

@@ -126,11 +126,13 @@ function M.on_attach(client, buffer)
 	for _, keys in pairs(keymaps) do
 		if not keys.has or M.has(buffer, keys.has) then
 			local opts = Keys.opts(keys)
+			-- vim.print(opts)
+			-- vim.print(keys)
 			---@diagnostic disable-next-line: no-unknown
 			opts.has = nil
 			opts.silent = opts.silent ~= false
 			opts.buffer = buffer
-			vim.keymap.set(keys.mode or 'n', keys[1], keys[2], opts)
+			vim.keymap.set(keys.mode or 'n', keys.lhs, keys.rhs, opts)
 		end
 	end
 end
