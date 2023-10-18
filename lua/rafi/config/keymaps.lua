@@ -56,12 +56,12 @@ map('n', ']a', '<cmd>lnext<CR>', { desc = 'Next Loclist Item' })
 map('n', '[a', '<cmd>lprev<CR>', { desc = 'Previous Loclist Item' })
 
 -- Whitespace jump (see plugin/whitespace.vim)
-map('n', ']s', function()
-	require('rafi.lib.edit').whitespace_jump(1)
-end, { desc = 'Next Whitespace' })
-map('n', '[s', function()
-	require('rafi.lib.edit').whitespace_jump(-1)
-end, { desc = 'Previous Whitespace' })
+-- map('n', ']s', function()
+-- 	require('rafi.lib.edit').whitespace_jump(1)
+-- end, { desc = 'Next Whitespace' })
+-- map('n', '[s', function()
+-- 	require('rafi.lib.edit').whitespace_jump(-1)
+-- end, { desc = 'Previous Whitespace' })
 
 -- Navigation in command line
 map('c', '<C-h>', '<Home>')
