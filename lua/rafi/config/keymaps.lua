@@ -4,23 +4,23 @@
 
 -- This file is automatically loaded by rafi.config.init
 
-local Util = require('rafi.lib.utils')
+local Util = require("rafi.lib.utils")
 local map = vim.keymap.set
 
 local function augroup(name)
-	return vim.api.nvim_create_augroup('rafi_' .. name, {})
+	return vim.api.nvim_create_augroup("rafi_" .. name, {})
 end
 
 -- Elite-mode: Arrow-keys resize window
 if vim.g.rafi_elite_mode then
-	map('n', '<Up>', '<cmd>resize +1<cr>', { desc = 'Resize Window' })
-	map('n', '<Down>', '<cmd>resize -1<cr>', { desc = 'Resize Window' })
-	map('n', '<Left>', '<cmd>vertical resize +1<cr>', { desc = 'Resize Window' })
-	map('n', '<Right>', '<cmd>vertical resize -1<cr>', { desc = 'Resize Window' })
+	map("n", "<Up>", "<cmd>resize +1<cr>", { desc = "Resize Window" })
+	map("n", "<Down>", "<cmd>resize -1<cr>", { desc = "Resize Window" })
+	map("n", "<Left>", "<cmd>vertical resize +1<cr>", { desc = "Resize Window" })
+	map("n", "<Right>", "<cmd>vertical resize -1<cr>", { desc = "Resize Window" })
 end
 
 -- Package-manager
-map('n', '<leader>l', '<cmd>Lazy<cr>', { desc = 'Open Lazy UI' })
+map("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Open Lazy UI" })
 
 -- stylua: ignore start
 

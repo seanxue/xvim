@@ -5,8 +5,8 @@ return {
 
 	-----------------------------------------------------------------------------
 	{
-		'lewis6991/gitsigns.nvim',
-		event = { 'BufReadPre', 'BufNewFile' },
+		"lewis6991/gitsigns.nvim",
+		event = { "BufReadPre", "BufNewFile" },
 		-- See: https://github.com/lewis6991/gitsigns.nvim#usage
 		-- stylua: ignore
 		opts = {
@@ -29,11 +29,11 @@ return {
 				delay = 1000,
 				ignore_whitespace = true,
 			},
-			current_line_blame_formatter = "<author>, <author_time:%Y-%m-%d> - <summary>",
+			current_line_blame_formatter = "[<author_time:%Y-%m-%d> <author>]: <summary>",
 			sign_priority = 6,
 			update_debounce = 100,
 			status_formatter = nil,  -- Use default
-			max_file_length = 40000, -- Disable if file is longer than this (in lines)
+			max_file_length = 6000, -- Disable if file is longer than this (in lines)
 			attach_to_untracked = true,
 			watch_gitdir = {
 				interval = 1000,
@@ -105,21 +105,21 @@ return {
 
 	-----------------------------------------------------------------------------
 	{
-		'sindrets/diffview.nvim',
-		cmd = { 'DiffviewOpen', 'DiffviewFileHistory' },
+		"sindrets/diffview.nvim",
+		cmd = { "DiffviewOpen", "DiffviewFileHistory" },
 		keys = {
-			{ '<Leader>gd', '<cmd>DiffviewFileHistory<CR>', desc = 'Diff File' },
-			{ '<Leader>gv', '<cmd>DiffviewOpen<CR>', desc = 'Diff View' },
-			{ '<Leader>gV', '<cmd>DiffviewClose<CR>', desc = 'Diff View' },
+			{ "<Leader>gd", "<cmd>DiffviewFileHistory<CR>", desc = "Diff File" },
+			{ "<Leader>gv", "<cmd>DiffviewOpen<CR>", desc = "Diff View" },
+			{ "<Leader>gV", "<cmd>DiffviewClose<CR>", desc = "Diff View" },
 		},
 		opts = function()
-			local actions = require('diffview.actions')
-			vim.api.nvim_create_autocmd({ 'WinEnter', 'BufEnter' }, {
-				group = vim.api.nvim_create_augroup('rafi_diffview', {}),
-				pattern = 'diffview:///panels/*',
+			local actions = require("diffview.actions")
+			vim.api.nvim_create_autocmd({ "WinEnter", "BufEnter" }, {
+				group = vim.api.nvim_create_augroup("rafi_diffview", {}),
+				pattern = "diffview:///panels/*",
 				callback = function()
 					vim.opt_local.cursorline = true
-					vim.opt_local.winhighlight = 'CursorLine:WildMenu'
+					vim.opt_local.winhighlight = "CursorLine:WildMenu"
 				end,
 			})
 
@@ -127,26 +127,26 @@ return {
 				enhanced_diff_hl = true, -- See ':h diffview-config-enhanced_diff_hl'
 				keymaps = {
 					view = {
-						{ 'n', 'q', '<cmd>DiffviewClose<CR>' },
-						{ 'n', '<Tab>', actions.select_next_entry },
-						{ 'n', '<S-Tab>', actions.select_prev_entry },
-						{ 'n', '<LocalLeader>a', actions.focus_files },
-						{ 'n', '<LocalLeader>e', actions.toggle_files },
+						{ "n", "q", "<cmd>DiffviewClose<CR>" },
+						{ "n", "<Tab>", actions.select_next_entry },
+						{ "n", "<S-Tab>", actions.select_prev_entry },
+						{ "n", "<LocalLeader>a", actions.focus_files },
+						{ "n", "<LocalLeader>e", actions.toggle_files },
 					},
 					file_panel = {
-						{ 'n', 'q', '<cmd>DiffviewClose<CR>' },
-						{ 'n', 'h', actions.prev_entry },
-						{ 'n', 'o', actions.focus_entry },
-						{ 'n', 'gf', actions.goto_file },
-						{ 'n', 'sg', actions.goto_file_split },
-						{ 'n', 'st', actions.goto_file_tab },
-						{ 'n', '<C-r>', actions.refresh_files },
-						{ 'n', ';e', actions.toggle_files },
+						{ "n", "q", "<cmd>DiffviewClose<CR>" },
+						{ "n", "h", actions.prev_entry },
+						{ "n", "o", actions.focus_entry },
+						{ "n", "gf", actions.goto_file },
+						{ "n", "sg", actions.goto_file_split },
+						{ "n", "st", actions.goto_file_tab },
+						{ "n", "<C-r>", actions.refresh_files },
+						{ "n", ";e", actions.toggle_files },
 					},
 					file_history_panel = {
-						{ 'n', 'q', '<cmd>DiffviewClose<CR>' },
-						{ 'n', 'o', actions.focus_entry },
-						{ 'n', 'O', actions.options },
+						{ "n", "q", "<cmd>DiffviewClose<CR>" },
+						{ "n", "o", actions.focus_entry },
+						{ "n", "O", actions.options },
 					},
 				},
 			}
@@ -155,14 +155,14 @@ return {
 
 	-----------------------------------------------------------------------------
 	{
-		'NeogitOrg/neogit',
+		"NeogitOrg/neogit",
 		dependencies = {
-			'sindrets/diffview.nvim',
-			'nvim-telescope/telescope.nvim'
+			"sindrets/diffview.nvim",
+			"nvim-telescope/telescope.nvim",
 		},
-		cmd = 'Neogit',
+		cmd = "Neogit",
 		keys = {
-			{ '<Leader>mg', '<cmd>Neogit<CR>', desc = 'Neogit' },
+			{ "<Leader>mg", "<cmd>Neogit<CR>", desc = "Neogit" },
 		},
 		-- See: https://github.com/TimUntersberger/neogit#configuration
 		opts = {
@@ -170,9 +170,9 @@ return {
 			disable_context_highlighting = false,
 			disable_commit_confirmation = false,
 			signs = {
-				section = { '>', 'v' },
-				item = { '>', 'v' },
-				hunk = { '', '' },
+				section = { ">", "v" },
+				item = { ">", "v" },
+				hunk = { "", "" },
 			},
 			integrations = {
 				diffview = true,
@@ -182,51 +182,51 @@ return {
 
 	-----------------------------------------------------------------------------
 	{
-		'FabijanZulj/blame.nvim',
-		cmd = 'ToggleBlame',
+		"FabijanZulj/blame.nvim",
+		cmd = "ToggleBlame",
 		-- stylua: ignore
 		keys = {
 			{ '<leader>gb', '<cmd>ToggleBlame virtual<CR>', desc = 'Git blame' },
 			{ '<leader>gB', '<cmd>ToggleBlame window<CR>', desc = 'Git blame (window)' },
 		},
 		opts = {
-			date_format = '%Y-%m-%d %H:%M',
+			date_format = "%Y-%m-%d %H:%M",
 		},
 	},
 
 	-----------------------------------------------------------------------------
 	{
-		'rhysd/git-messenger.vim',
-		cmd = 'GitMessenger',
+		"rhysd/git-messenger.vim",
+		cmd = "GitMessenger",
 		keys = {
-			{ '<Leader>gm', '<Plug>(git-messenger)', desc = 'Git messenger'}
+			{ "<Leader>gm", "<Plug>(git-messenger)", desc = "Git messenger" },
 		},
 		init = function()
-			vim.g.git_messenger_include_diff = 'current'
+			vim.g.git_messenger_include_diff = "current"
 			vim.g.git_messenger_no_default_mappings = false
-			vim.g.git_messenger_floating_win_opts = { border = 'rounded' }
+			vim.g.git_messenger_floating_win_opts = { border = "rounded" }
 		end,
 	},
 
 	-----------------------------------------------------------------------------
 	{
-		'ruifm/gitlinker.nvim',
+		"ruifm/gitlinker.nvim",
 		keys = {
 			{
-				'<leader>go',
+				"<leader>go",
 				function()
-					require('gitlinker').get_buf_range_url('n')
+					require("gitlinker").get_buf_range_url("n")
 				end,
 				silent = true,
-				desc = 'Git open in browser',
+				desc = "Git open in browser",
 			},
 			{
-				'<leader>go',
+				"<leader>go",
 				function()
-					require('gitlinker').get_buf_range_url('v')
+					require("gitlinker").get_buf_range_url("v")
 				end,
-				mode = 'x',
-				desc = 'Git open in browser',
+				mode = "x",
+				desc = "Git open in browser",
 			},
 		},
 		opts = {
@@ -235,7 +235,7 @@ return {
 				add_current_line_on_normal_mode = true,
 				print_url = false,
 				action_callback = function(...)
-					return require('gitlinker.actions').open_in_browser(...)
+					return require("gitlinker.actions").open_in_browser(...)
 				end,
 			},
 		},
@@ -243,8 +243,8 @@ return {
 
 	-----------------------------------------------------------------------------
 	{
-		'rhysd/committia.vim',
-		event = 'BufReadPre COMMIT_EDITMSG',
+		"rhysd/committia.vim",
+		event = "BufReadPre COMMIT_EDITMSG",
 		init = function()
 			-- See: https://github.com/rhysd/committia.vim#variables
 			vim.g.committia_min_window_width = 30
@@ -259,14 +259,14 @@ return {
 						silent = true,
 					}
 					local function imap(lhs, rhs)
-						vim.keymap.set('i', lhs, rhs, opts)
+						vim.keymap.set("i", lhs, rhs, opts)
 					end
-					imap('<C-d>', '<Plug>(committia-scroll-diff-down-half)')
-					imap('<C-u>', '<Plug>(committia-scroll-diff-up-half)')
-					imap('<C-f>', '<Plug>(committia-scroll-diff-down-page)')
-					imap('<C-b>', '<Plug>(committia-scroll-diff-up-page)')
-					imap('<C-j>', '<Plug>(committia-scroll-diff-down)')
-					imap('<C-k>', '<Plug>(committia-scroll-diff-up)')
+					imap("<C-d>", "<Plug>(committia-scroll-diff-down-half)")
+					imap("<C-u>", "<Plug>(committia-scroll-diff-up-half)")
+					imap("<C-f>", "<Plug>(committia-scroll-diff-down-page)")
+					imap("<C-b>", "<Plug>(committia-scroll-diff-up-page)")
+					imap("<C-j>", "<Plug>(committia-scroll-diff-down)")
+					imap("<C-k>", "<Plug>(committia-scroll-diff-up)")
 				end,
 			}
 		end,
