@@ -358,13 +358,15 @@ return {
 		},
 		opts = {
 			width = 30,
-			autofold_depth = 0,
+			autofold_depth = 3,
 			keymaps = {
 				hover_symbol = "K",
 				toggle_preview = "p",
 			},
 		},
 		init = function()
+			-- TODO: apply symbols from rafi.config
+			-- require('rafi.config').icons.kinds)
 			vim.api.nvim_create_autocmd("FileType", {
 				group = vim.api.nvim_create_augroup("rafi_outline", {}),
 				pattern = "Outline",

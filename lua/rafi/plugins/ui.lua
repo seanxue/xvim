@@ -4,18 +4,18 @@
 return {
 
 	-----------------------------------------------------------------------------
-	{ 'nvim-tree/nvim-web-devicons', lazy = false },
-	{ 'MunifTanjim/nui.nvim', lazy = false },
-	{ 'rafi/tabstrip.nvim', lazy = false, priority = 98, opts = true },
+	{ "nvim-tree/nvim-web-devicons", lazy = false },
+	{ "MunifTanjim/nui.nvim", lazy = false },
+	{ "rafi/tabstrip.nvim", lazy = false, priority = 98, opts = true },
 
 	-----------------------------------------------------------------------------
 	{
-		'folke/noice.nvim',
-		event = 'VeryLazy',
+		"folke/noice.nvim",
+		event = "VeryLazy",
 		dependencies = {
-			'MunifTanjim/nui.nvim',
-			'rcarriga/nvim-notify',
-			'nvim-treesitter/nvim-treesitter',
+			"MunifTanjim/nui.nvim",
+			"rcarriga/nvim-notify",
+			"nvim-treesitter/nvim-treesitter",
 		},
 		-- stylua: ignore
 		keys = {
@@ -30,9 +30,9 @@ return {
 		opts = {
 			lsp = {
 				override = {
-					['vim.lsp.util.convert_input_to_markdown_lines'] = true,
-					['vim.lsp.util.stylize_markdown'] = true,
-					['cmp.entry.get_documentation'] = true,
+					["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+					["vim.lsp.util.stylize_markdown"] = true,
+					["cmp.entry.get_documentation"] = true,
 				},
 			},
 			messages = {
@@ -41,48 +41,48 @@ return {
 			routes = {
 				-- See :h ui-messages
 				{
-					filter = { event = 'msg_show', find = '%d+L, %d+B$' },
-					view = 'mini',
+					filter = { event = "msg_show", find = "%d+L, %d+B$" },
+					view = "mini",
 				},
 				{
-					filter = { event = 'msg_show', find = '^Hunk %d+ of %d+$' },
-					view = 'mini',
+					filter = { event = "msg_show", find = "^Hunk %d+ of %d+$" },
+					view = "mini",
 				},
 				{
-					filter = { event = 'notify', find = '^No code actions available$' },
-					view = 'mini',
+					filter = { event = "notify", find = "^No code actions available$" },
+					view = "mini",
 				},
 				{
-					filter = { event = 'notify', find = '^No information available$' },
+					filter = { event = "notify", find = "^No information available$" },
 					opts = { skip = true },
 				},
 				{
-					filter = { event = 'msg_show', find = '^%d+ change;' },
+					filter = { event = "msg_show", find = "^%d+ change;" },
 					opts = { skip = true },
 				},
 				{
-					filter = { event = 'msg_show', find = '^%d+ %a+ lines' },
+					filter = { event = "msg_show", find = "^%d+ %a+ lines" },
 					opts = { skip = true },
 				},
 				{
-					filter = { event = 'msg_show', find = '^%d+ lines yanked$' },
+					filter = { event = "msg_show", find = "^%d+ lines yanked$" },
 					opts = { skip = true },
 				},
 				{
-					filter = { event = 'msg_show', kind = 'emsg', find = 'E490' },
+					filter = { event = "msg_show", kind = "emsg", find = "E490" },
 					opts = { skip = true },
 				},
 				{
-					filter = { event = 'msg_show', kind = 'quickfix' },
-					view = 'mini',
+					filter = { event = "msg_show", kind = "quickfix" },
+					view = "mini",
 				},
 				{
-					filter = { event = 'msg_show', kind = 'search_count' },
-					view = 'mini',
+					filter = { event = "msg_show", kind = "search_count" },
+					view = "mini",
 				},
 				{
-					filter = { event = 'msg_show', kind = 'wmsg' },
-					view = 'mini',
+					filter = { event = "msg_show", kind = "wmsg" },
+					view = "mini",
 				},
 			},
 			presets = {
@@ -93,8 +93,8 @@ return {
 			},
 			commands = {
 				all = {
-					view = 'split',
-					opts = { enter = true, format = 'details' },
+					view = "split",
+					opts = { enter = true, format = "details" },
 					filter = {},
 				},
 			},
@@ -110,16 +110,16 @@ return {
 
 	-----------------------------------------------------------------------------
 	{
-		'stevearc/dressing.nvim',
+		"stevearc/dressing.nvim",
 		init = function()
 			---@diagnostic disable-next-line: duplicate-set-field
 			vim.ui.select = function(...)
-				require('lazy').load({ plugins = { 'dressing.nvim' } })
+				require("lazy").load({ plugins = { "dressing.nvim" } })
 				return vim.ui.select(...)
 			end
 			---@diagnostic disable-next-line: duplicate-set-field
 			vim.ui.input = function(...)
-				require('lazy').load({ plugins = { 'dressing.nvim' } })
+				require("lazy").load({ plugins = { "dressing.nvim" } })
 				return vim.ui.input(...)
 			end
 		end,
@@ -127,21 +127,20 @@ return {
 
 	-----------------------------------------------------------------------------
 	{
-		'SmiteshP/nvim-navic',
+		"SmiteshP/nvim-navic",
 		keys = {
 			{
-				'<Leader>tf',
+				"<Leader>tf",
 				function()
 					if vim.b.navic_winbar then
 						vim.b.navic_winbar = false
-						vim.opt_local.winbar = ''
+						vim.opt_local.winbar = ""
 					else
 						vim.b.navic_winbar = true
-						vim.opt_local.winbar = '%#NavicIconsFile# %t %* '
-							.. "%{%v:lua.require'nvim-navic'.get_location()%}"
+						vim.opt_local.winbar = "%#NavicIconsFile# %t %* " .. "%{%v:lua.require'nvim-navic'.get_location()%}"
 					end
 				end,
-				desc = 'Toggle structure panel',
+				desc = "Toggle structure panel",
 			},
 		},
 		init = function()
@@ -149,32 +148,32 @@ return {
 
 			---@param client lsp.Client
 			---@param buffer integer
-			require('rafi.lib.utils').on_attach(function(client, buffer)
+			require("rafi.lib.utils").on_attach(function(client, buffer)
 				if client.server_capabilities.documentSymbolProvider then
-					require('nvim-navic').attach(client, buffer)
+					require("nvim-navic").attach(client, buffer)
 				end
 			end)
 		end,
 		opts = function()
 			return {
-				separator = '  ',
+				separator = "  ",
 				highlight = true,
-				icons = require('rafi.config').icons.kinds,
+				icons = require("rafi.config").icons.kinds,
 			}
 		end,
 	},
 
 	-----------------------------------------------------------------------------
 	{
-		'rcarriga/nvim-notify',
-		event = 'VeryLazy',
+		"rcarriga/nvim-notify",
+		event = "VeryLazy",
 		keys = {
 			{
-				'<leader>un',
+				"<leader>un",
 				function()
-					require('notify').dismiss({ silent = true, pending = true })
+					require("notify").dismiss({ silent = true, pending = true })
 				end,
-				desc = 'Dismiss all Notifications',
+				desc = "Dismiss all Notifications",
 			},
 		},
 		opts = {
@@ -188,10 +187,10 @@ return {
 		},
 		init = function()
 			-- When noice is not enabled, install notify on VeryLazy
-			local Util = require('rafi.lib.utils')
-			if not Util.has('noice.nvim') then
+			local Util = require("rafi.lib.utils")
+			if not Util.has("noice.nvim") then
 				Util.on_very_lazy(function()
-					vim.notify = require('notify')
+					vim.notify = require("notify")
 				end)
 			end
 		end,
@@ -199,30 +198,30 @@ return {
 
 	-----------------------------------------------------------------------------
 	{
-		'chentoast/marks.nvim',
-		dependencies = 'lewis6991/gitsigns.nvim',
-		event = 'FileType',
+		"chentoast/marks.nvim",
+		dependencies = "lewis6991/gitsigns.nvim",
+		event = "FileType",
 		keys = {
-			{ 'm/', '<cmd>MarksListAll<CR>', desc = 'Marks from all opened buffers' },
+			{ "m/", "<cmd>MarksListAll<CR>", desc = "Marks from all opened buffers" },
 		},
 		opts = {
 			sign_priority = { lower = 10, upper = 15, builtin = 8, bookmark = 20 },
-			bookmark_1 = { sign = '󰈼' }, -- ⚐ ⚑ 󰈻 󰈼 󰈽 󰈾 󰈿 󰉀
+			bookmark_1 = { sign = "󰈼" }, -- ⚐ ⚑ 󰈻 󰈼 󰈽 󰈾 󰈿 󰉀
 			mappings = {
-				annotate = 'm<Space>',
+				annotate = "m<Space>",
 			},
 		},
 	},
 
 	-----------------------------------------------------------------------------
 	{
-		'lukas-reineke/indent-blankline.nvim',
+		"lukas-reineke/indent-blankline.nvim",
 		main = "ibl",
-		event = 'FileType',
+		event = "FileType",
 		keys = {
-			{ '<Leader>ue', '<cmd>Ideally<CR>' },
+			{ "<Leader>ue", "<cmd>Ideally<CR>" },
 		},
-		opts = function ()
+		opts = function()
 			local highlight = {
 				"RainbowRed",
 				"RainbowYellow",
@@ -233,7 +232,7 @@ return {
 				"RainbowCyan",
 			}
 
-			local hooks = require "ibl.hooks"
+			local hooks = require("ibl.hooks")
 			-- create the highlight groups in the highlight setup hook, so they are reset
 			-- every time the colorscheme changes
 			hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
@@ -247,32 +246,32 @@ return {
 			end)
 			return {
 				indent = {
-					char = '▏',
-					tab_char = '▏',
+					char = "▏",
+					tab_char = "▏",
 					highlight = highlight,
 				},
-				whitespace  = {
+				whitespace = {
 					remove_blankline_trail = false,
 				},
 				exclude = {
 					filetypes = {
-						'lspinfo',
-						'checkhealth',
-						'git',
-						'gitcommit',
-						'help',
-						'man',
-						'lazy',
-						'alpha',
-						'dashboard',
-						'terminal',
-						'TelescopePrompt',
-						'TelescopeResults',
-						'neo-tree',
-						'Outline',
-						'mason',
-						'Trouble',
-					}
+						"lspinfo",
+						"checkhealth",
+						"git",
+						"gitcommit",
+						"help",
+						"man",
+						"lazy",
+						"alpha",
+						"dashboard",
+						"terminal",
+						"TelescopePrompt",
+						"TelescopeResults",
+						"neo-tree",
+						"Outline",
+						"mason",
+						"Trouble",
+					},
 				},
 			}
 		end,
@@ -280,53 +279,53 @@ return {
 
 	-----------------------------------------------------------------------------
 	{
-		'tenxsoydev/tabs-vs-spaces.nvim',
-		event = { 'BufReadPost', 'BufNewFile' },
+		"tenxsoydev/tabs-vs-spaces.nvim",
+		event = { "BufReadPost", "BufNewFile" },
 		config = true,
 	},
 
 	-----------------------------------------------------------------------------
 	{
-		't9md/vim-quickhl',
+		"t9md/vim-quickhl",
 		keys = {
 			{
-				'<Leader>mt',
-				'<Plug>(quickhl-manual-this)',
-				mode = { 'n', 'x' },
-				desc = 'Highlight word',
+				"<Leader>mt",
+				"<Plug>(quickhl-manual-this)",
+				mode = { "n", "x" },
+				desc = "Highlight word",
 			},
 		},
 	},
 
 	-----------------------------------------------------------------------------
 	{
-		'kevinhwang91/nvim-bqf',
-		ft = 'qf',
-		cmd = 'BqfAutoToggle',
-		event = 'QuickFixCmdPost',
+		"kevinhwang91/nvim-bqf",
+		ft = "qf",
+		cmd = "BqfAutoToggle",
+		event = "QuickFixCmdPost",
 		opts = {
 			auto_resize_height = false,
 			func_map = {
-				tab = 'st',
-				split = 'sv',
-				vsplit = 'sg',
+				tab = "st",
+				split = "sv",
+				vsplit = "sg",
 
-				stoggleup = 'K',
-				stoggledown = 'J',
-				stogglevm = '<Space>',
+				stoggleup = "K",
+				stoggledown = "J",
+				stogglevm = "<Space>",
 
-				ptoggleitem = 'p',
-				ptoggleauto = 'P',
-				ptogglemode = 'zp',
+				ptoggleitem = "p",
+				ptoggleauto = "P",
+				ptogglemode = "zp",
 
-				pscrollup = '<C-b>',
-				pscrolldown = '<C-f>',
+				pscrollup = "<C-b>",
+				pscrolldown = "<C-f>",
 
-				prevfile = 'gk',
-				nextfile = 'gj',
+				prevfile = "gk",
+				nextfile = "gj",
 
-				prevhist = '<S-Tab>',
-				nexthist = '<Tab>',
+				prevhist = "<S-Tab>",
+				nexthist = "<Tab>",
 			},
 			preview = {
 				auto_preview = true,
@@ -345,28 +344,28 @@ return {
 
 	-----------------------------------------------------------------------------
 	{
-		'uga-rosa/ccc.nvim',
-		event = 'FileType',
+		"uga-rosa/ccc.nvim",
+		event = "FileType",
 		keys = {
-			{ '<Leader>cp', '<cmd>CccPick<CR>', desc = 'Color-picker' },
+			{ "<Leader>cp", "<cmd>CccPick<CR>", desc = "Color-picker" },
 		},
 		opts = {
 			highlighter = {
 				auto_enable = true,
 				lsp = true,
-				excludes = { 'lazy', 'mason', 'help', 'neo-tree' },
+				excludes = { "lazy", "mason", "help", "neo-tree" },
 			},
 		},
 	},
 
 	-----------------------------------------------------------------------------
 	{
-		'itchyny/calendar.vim',
-		cmd = 'Calendar',
+		"itchyny/calendar.vim",
+		cmd = "Calendar",
 		init = function()
 			vim.g.calendar_google_calendar = 1
 			vim.g.calendar_google_task = 1
-			vim.g.calendar_cache_directory = vim.fn.stdpath('data') .. '/calendar'
+			vim.g.calendar_cache_directory = vim.fn.stdpath("data") .. "/calendar"
 		end,
 	},
 }

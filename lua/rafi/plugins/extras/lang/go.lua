@@ -4,29 +4,29 @@
 return {
 
 	{
-		'nvim-treesitter/nvim-treesitter',
+		"nvim-treesitter/nvim-treesitter",
 		opts = function(_, opts)
-			if type(opts.ensure_installed) == 'table' then
+			if type(opts.ensure_installed) == "table" then
 				vim.list_extend(opts.ensure_installed, {
-					'go',
-					'gomod',
-					'gosum',
-					'gowork',
+					"go",
+					"gomod",
+					"gosum",
+					"gowork",
 				})
 			end
 
 			-- Convert a JSON string to a Go struct.
 			vim.api.nvim_buf_create_user_command(
 				0,
-				'JsonToStruct',
+				"JsonToStruct",
 				---@param args table
 				function(args)
-					local range = args.line1 .. ',' .. args.line2
+					local range = args.line1 .. "," .. args.line2
 					local fname = vim.api.nvim_buf_get_name(0)
-					local cmd = { '!json-to-struct' }
-					table.insert(cmd, '-name ' .. vim.fn.fnamemodify(fname, ':t:r'))
-					table.insert(cmd, '-pkg ' .. vim.fn.fnamemodify(fname, ':h:t:r'))
-					vim.cmd(range .. ' ' .. table.concat(cmd, ' '))
+					local cmd = { "!json-to-struct" }
+					table.insert(cmd, "-name " .. vim.fn.fnamemodify(fname, ":t:r"))
+					table.insert(cmd, "-pkg " .. vim.fn.fnamemodify(fname, ":h:t:r"))
+					vim.cmd(range .. " " .. table.concat(cmd, " "))
 				end,
 				{ bar = true, nargs = 0, range = true }
 			)
@@ -34,7 +34,7 @@ return {
 	},
 
 	{
-		'neovim/nvim-lspconfig',
+		"neovim/nvim-lspconfig",
 		opts = {
 			servers = {
 				gopls = {
@@ -47,11 +47,11 @@ return {
 							staticcheck = true,
 							allowModfileModifications = true,
 							directoryFilters = {
-								'-.git',
-								'-.vscode',
-								'-.idea',
-								'-.vscode-test',
-								'-node_modules',
+								"-.git",
+								"-.vscode",
+								"-.idea",
+								"-.vscode-test",
+								"-node_modules",
 							},
 							semanticTokens = true,
 							codelenses = {
@@ -96,11 +96,10 @@ return {
 				gopls = function(_, _)
 					-- workaround for gopls not supporting semanticTokensProvider
 					-- https://github.com/golang/go/issues/54531#issuecomment-1464982242
-					require('rafi.lib.utils').on_attach(function(client, _)
-						if client.name == 'gopls' then
+					require("rafi.lib.utils").on_attach(function(client, _)
+						if client.name == "gopls" then
 							if not client.server_capabilities.semanticTokensProvider then
-								local semantic =
-										client.config.capabilities.textDocument.semanticTokens
+								local semantic = client.config.capabilities.textDocument.semanticTokens
 								if semantic ~= nil then
 									client.server_capabilities.semanticTokensProvider = {
 										full = true,
@@ -121,38 +120,38 @@ return {
 	},
 
 	{
-		'mason.nvim',
+		"mason.nvim",
 		opts = function(_, opts)
 			opts.ensure_installed = opts.ensure_installed or {}
 			vim.list_extend(opts.ensure_installed, {
-				'gofumpt',
-				'goimports-reviser',
-				'gomodifytags',
-				'impl',
-				'json-to-struct',
+				"gofumpt",
+				"goimports-reviser",
+				"gomodifytags",
+				"impl",
+				"json-to-struct",
 			})
 		end,
 	},
 
 	{
-		'mhartington/formatter.nvim',
+		"mhartington/formatter.nvim",
 		optional = true,
 		opts = function(_, opts)
 			opts = opts or {}
 			local filetypes = {
 				go = {
-					require('formatter.filetypes.go').gofumpt,
+					require("formatter.filetypes.go").gofumpt,
 				},
 			}
-			opts.filetype = vim.tbl_extend('keep', opts.filetype or {}, filetypes)
+			opts.filetype = vim.tbl_extend("keep", opts.filetype or {}, filetypes)
 		end,
 	},
 
 	{
-		'jose-elias-alvarez/null-ls.nvim',
+		"jose-elias-alvarez/null-ls.nvim",
 		optional = true,
 		opts = function(_, opts)
-			local nls = require('null-ls')
+			local nls = require("null-ls")
 			local sources = {
 				nls.builtins.code_actions.gomodifytags,
 				nls.builtins.code_actions.impl,
@@ -167,30 +166,30 @@ return {
 	},
 
 	{
-		'mfussenegger/nvim-dap',
+		"mfussenegger/nvim-dap",
 		optional = true,
 		dependencies = {
 			{
-				'mason.nvim',
+				"mason.nvim",
 				opts = function(_, opts)
 					opts.ensure_installed = opts.ensure_installed or {}
-					vim.list_extend(opts.ensure_installed, { 'delve' })
+					vim.list_extend(opts.ensure_installed, { "delve" })
 				end,
 			},
 			{
-				'leoluz/nvim-dap-go',
+				"leoluz/nvim-dap-go",
 				config = true,
 			},
 		},
 	},
 
 	{
-		'nvim-neotest/neotest',
+		"nvim-neotest/neotest",
 		optional = true,
-		dependencies = { 'nvim-neotest/neotest-go' },
+		dependencies = { "nvim-neotest/neotest-go" },
 		opts = {
 			adapters = {
-				['neotest-go'] = {
+				["neotest-go"] = {
 					-- Here we can set options for neotest-go, e.g.
 					-- args = { '-tags=integration' }
 				},

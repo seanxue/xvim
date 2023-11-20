@@ -88,9 +88,6 @@ return {
 				},
 			},
 
-			-- See: https://github.com/JoosepAlviste/nvim-ts-context-commentstring
-			context_commentstring = { enable = true, enable_autocmd = false },
-
 			incremental_selection = {
 				enable = true,
 				keymaps = {
@@ -203,5 +200,10 @@ return {
 				"zig",
 			},
 		},
+		config = function(_, opts)
+			require("nvim-treesitter.configs").setup(opts)
+			vim.g.skip_ts_context_commentstring_module = true
+			require("ts_context_commentstring").setup({ enable_autocmd = false })
+		end,
 	},
 }

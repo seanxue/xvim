@@ -7,7 +7,7 @@
 ---@class RafiConfig
 local M = {}
 
-M.lazy_version = '>=9.1.0'
+M.lazy_version = ">=9.1.0"
 
 ---@class RafiConfig
 local defaults = {
@@ -25,7 +25,7 @@ local defaults = {
 	-- String like `habamax` or a function that will load the colorscheme.
 	-- Disabled by default to allow theme-loader.nvim to manage the colorscheme.
 	---@type string|fun()
-	colorscheme = '',
+	colorscheme = "",
 
 	features = {
 		elite_mode = true,
@@ -75,7 +75,7 @@ local defaults = {
 			File = ' ', --    󰈔 󰈙
 			Folder = ' ', --   󰉋
 			Function = '󰊕 ', --  󰊕 
-			Interface = ' ', --    
+			Interface = ' ', --    
 			Key = ' ',  -- 
 			Keyword = ' ', --   󰌋 
 			Method = '󰆧 ', --  󰆧 ƒ
@@ -107,19 +107,19 @@ function M.init()
 	if not M.did_init then
 		M.did_init = true
 		-- delay notifications till vim.notify was replaced or after 500ms
-		require('rafi.config').lazy_notify()
+		require("rafi.config").lazy_notify()
 
 		-- load options here, before lazy init while sourcing plugin modules
 		-- this is needed to make sure options will be correctly applied
 		-- after installing missing plugins
-		require('rafi.config').load('options')
+		require("rafi.config").load("options")
 
 		-- carry over plugin options that their name has been changed.
-		local Plugin = require('lazy.core.plugin')
+		local Plugin = require("lazy.core.plugin")
 		local add = Plugin.Spec.add
 		---@diagnostic disable-next-line: duplicate-set-field
 		Plugin.Spec.add = function(self, plugin, ...)
-			if type(plugin) == 'table' and M.renames[plugin[1]] then
+			if type(plugin) == "table" and M.renames[plugin[1]] then
 				plugin[1] = M.renames[plugin[1]]
 			end
 			return add(self, plugin, ...)
@@ -136,51 +136,45 @@ function M.setup(user_opts)
 	if not M.did_init then
 		M.init()
 	end
-	options = vim.tbl_deep_extend('force', defaults, user_opts or {})
+	options = vim.tbl_deep_extend("force", defaults, user_opts or {})
 	if not M.has_version() then
-		require('lazy.core.util').error(
-			string.format(
-				'**lazy.nvim** version %s is required.\n Please upgrade **lazy.nvim**',
-				M.lazy_version
-			)
+		require("lazy.core.util").error(
+			string.format("**lazy.nvim** version %s is required.\n Please upgrade **lazy.nvim**", M.lazy_version)
 		)
-		error('Exiting')
+		error("Exiting")
 	end
 
 	-- Override config with user config at lua/config/setup.lua
-	local ok, user_setup = pcall(require, 'config.setup')
+	local ok, user_setup = pcall(require, "config.setup")
 	if ok and user_setup.override then
-		options = vim.tbl_deep_extend('force', options, user_setup.override())
+		options = vim.tbl_deep_extend("force", options, user_setup.override())
 	end
 	for feat_name, feat_val in pairs(options.features) do
-		vim.g['rafi_' .. feat_name] = feat_val
+		vim.g["rafi_" .. feat_name] = feat_val
 	end
 
-	M.load('autocmds')
-	M.load('keymaps')
+	M.load("autocmds")
+	M.load("keymaps")
 
 	-- Set colorscheme
-	require('lazy.core.util').try(
-		function()
-			if type(M.colorscheme) == 'function' then
-				M.colorscheme()
-			elseif #M.colorscheme > 0 then
-				vim.cmd.colorscheme(M.colorscheme)
-			end
+	require("lazy.core.util").try(function()
+		if type(M.colorscheme) == "function" then
+			M.colorscheme()
+		elseif #M.colorscheme > 0 then
+			vim.cmd.colorscheme(M.colorscheme)
+		end
+	end, {
+		msg = "Could not load your colorscheme",
+		on_error = function(msg)
+			require("lazy.core.util").error(msg)
+			vim.cmd.colorscheme("habamax")
 		end,
-		{
-			msg = 'Could not load your colorscheme',
-			on_error = function(msg)
-				require('lazy.core.util').error(msg)
-				vim.cmd.colorscheme('habamax')
-			end,
-		}
-	)
+	})
 end
 
 ---@return table
 function M.user_lazy_opts()
-	local ok, user_setup = pcall(require, 'config.setup')
+	local ok, user_setup = pcall(require, "config.setup")
 	if ok and user_setup.lazy_opts then
 		return user_setup.lazy_opts()
 	end
@@ -190,22 +184,21 @@ end
 ---@param range? string
 ---@return boolean
 function M.has_version(range)
-	local Semver = require('lazy.manage.semver')
-	return Semver.range(range or M.lazy_version)
-		:matches(require('lazy.core.config').version or '0.0.0')
+	local Semver = require("lazy.manage.semver")
+	return Semver.range(range or M.lazy_version):matches(require("lazy.core.config").version or "0.0.0")
 end
 
 ---@param name "autocmds" | "options" | "keymaps"
 function M.load(name)
-	local Util = require('lazy.core.util')
+	local Util = require("lazy.core.util")
 	local function _load(mod)
 		Util.try(function()
 			require(mod)
 		end, {
-			msg = 'Failed loading ' .. mod,
+			msg = "Failed loading " .. mod,
 			on_error = function(msg)
-				local info = require('lazy.core.cache').find(mod)
-				if info == nil or (type(info) == 'table' and #info == 0) then
+				local info = require("lazy.core.cache").find(mod)
+				if info == nil or (type(info) == "table" and #info == 0) then
 					return
 				end
 				Util.error(msg)
@@ -213,26 +206,26 @@ function M.load(name)
 		})
 	end
 	-- always load rafi's file, then user file
-	if M.defaults[name] or name == 'options' then
-		_load('rafi.config.' .. name)
+	if M.defaults[name] or name == "options" then
+		_load("rafi.config." .. name)
 	end
-	_load('config.' .. name)
-	if vim.bo.filetype == 'lazy' then
+	_load("config." .. name)
+	if vim.bo.filetype == "lazy" then
 		vim.cmd([[do VimResized]])
 	end
 end
 
 -- Ensure package manager (lazy.nvim) exists.
 function M.ensure_lazy()
-	local lazypath = M.path_join(vim.fn.stdpath('data'), 'lazy', 'lazy.nvim')
+	local lazypath = M.path_join(vim.fn.stdpath("data"), "lazy", "lazy.nvim")
 	if not vim.loop.fs_stat(lazypath) then
-		print('Installing lazy.nvim…')
+		print("Installing lazy.nvim…")
 		vim.fn.system({
-			'git',
-			'clone',
-			'--filter=blob:none',
-			'--branch=stable',
-			'https://github.com/folke/lazy.nvim.git',
+			"git",
+			"clone",
+			"--filter=blob:none",
+			"--branch=stable",
+			"https://github.com/folke/lazy.nvim.git",
 			lazypath,
 		})
 	end
@@ -242,9 +235,9 @@ end
 -- Validate if lua/plugins/ or lua/plugins.lua exist.
 ---@return boolean
 function M.has_user_plugins()
-	local user_path = M.path_join(vim.fn.stdpath('config'), 'lua')
-	return vim.loop.fs_stat(M.path_join(user_path, 'plugins')) ~= nil
-		or vim.loop.fs_stat(M.path_join(user_path, 'plugins.lua')) ~= nil
+	local user_path = M.path_join(vim.fn.stdpath("config"), "lua")
+	return vim.loop.fs_stat(M.path_join(user_path, "plugins")) ~= nil
+		or vim.loop.fs_stat(M.path_join(user_path, "plugins.lua")) ~= nil
 end
 
 -- Delay notifications till vim.notify was replaced or after 500ms.
@@ -298,10 +291,10 @@ end
 M.path_sep = (function()
 	if jit then
 		local os = string.lower(jit.os)
-		if os ~= 'windows' then
-			return '/'
+		if os ~= "windows" then
+			return "/"
 		else
-			return '\\'
+			return "\\"
 		end
 	else
 		return package.config:sub(1, 1)
