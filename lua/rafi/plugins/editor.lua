@@ -415,7 +415,7 @@ return {
 			filter_rules = {
 				include_current_win = true,
 				bo = {
-					filetype = { "notify", "noice" },
+					filetype = { "notify", "noice", "incline", "neo-tree" },
 					buftype = {},
 				},
 			},
