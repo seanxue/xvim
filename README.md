@@ -91,9 +91,8 @@ Please read "[Extending](#extending)" to learn how to customize and modify.
 - LSP configuration with [nvim-lspconfig]
 - [telescope.nvim] centric work-flow with lists (try <kbd>;</kbd>+<kbd>f</kbd>…)
 - Custom context-menu (try it! <kbd>;</kbd>+<kbd>c</kbd>)
-- Auto-complete extensive setup with [nvim-cmp]
-  (try <kbd>Tab</kbd> or <kbd>Ctrl</kbd>+<kbd>Space</kbd> in insert-mode)
-- Structure view with [simrat39/symbols-outline.nvim]
+- Auto-complete extensive setup with [nvim-cmp] (try <kbd>Tab</kbd> or <kbd>Ctrl</kbd>+<kbd>Space</kbd> in insert-mode)
+- Structure view with [hedyhli/outline.nvim]
 - Git features using [lewis6991/gitsigns.nvim], [sindrets/diffview.nvim], and [more](#git-plugins)
 - Auto-save and restore sessions with [olimorris/persisted.nvim]
 - Unobtrusive, yet informative status & tab lines
@@ -485,32 +484,32 @@ _Note_ that 95% of the plugins are **lazy-loaded**.
 
 ### Editor Plugins
 
-| Name                            | Description                                               |
-| ------------------------------- | --------------------------------------------------------- |
-| [folke/lazy.nvim]               | Modern plugin manager for Neovim                          |
-| [nmac427/guess-indent.nvim]     | Automatic indentation style detection                     |
-| [christoomey/tmux-navigator]    | Seamless navigation between tmux panes and vim splits     |
-| [tweekmonster/helpful.vim]      | Display vim version numbers in docs                       |
-| [lambdalisue/suda.vim]          | An alternative sudo for Vim and Neovim                    |
-| [olimorris/persisted.nvim]      | Simple session management for Neovim with git branching   |
-| [RRethy/vim-illuminate]         | Highlights other uses of the word under the cursor        |
-| [mbbill/undotree]               | Ultimate undo history visualizer                          |
-| [ggandor/flit.nvim]             | Enhanced f/t motions for Leap                             |
-| [ggandor/leap.nvim]             | General-purpose motion plugin                             |
-| [kana/vim-niceblock]            | Make blockwise Visual mode more useful                    |
-| [haya14busa/vim-edgemotion]     | Jump to the edge of block                                 |
-| [folke/zen-mode.nvim]           | Distraction-free coding for Neovim                        |
-| [folke/which-key.nvim]          | Create key bindings that stick                            |
-| [folke/todo-comments.nvim]      | Highlight, list and search todo comments in your projects |
-| [folke/trouble.nvim]            | Pretty lists to help you solve all code diagnostics       |
-| [akinsho/toggleterm.nvim]       | Persist and toggle multiple terminals                     |
-| [simrat39/symbols-outline.nvim] | Tree like view for symbols using LSP                      |
-| [s1n7ax/nvim-window-picker]     | Window picker                                             |
-| [rest-nvim/rest.nvim]           | Fast Neovim http client written in Lua                    |
-| [mickael-menu/zk-nvim]          | Extension for the zk plain text note-taking assistant     |
-| [nvim-pack/nvim-spectre]        | Find the enemy and replace them with dark power           |
-| [echasnovski/mini.bufremove]    | Helper for removing buffers                               |
-| [mzlogin/vim-markdown-toc]      | Generate table of contents for Markdown files             |
+| Name                         | Description                                               |
+| ---------------------------- | --------------------------------------------------------- |
+| [folke/lazy.nvim]            | Modern plugin manager for Neovim                          |
+| [nmac427/guess-indent.nvim]  | Automatic indentation style detection                     |
+| [christoomey/tmux-navigator] | Seamless navigation between tmux panes and vim splits     |
+| [tweekmonster/helpful.vim]   | Display vim version numbers in docs                       |
+| [lambdalisue/suda.vim]       | An alternative sudo for Vim and Neovim                    |
+| [olimorris/persisted.nvim]   | Simple session management for Neovim with git branching   |
+| [RRethy/vim-illuminate]      | Highlights other uses of the word under the cursor        |
+| [mbbill/undotree]            | Ultimate undo history visualizer                          |
+| [ggandor/flit.nvim]          | Enhanced f/t motions for Leap                             |
+| [ggandor/leap.nvim]          | General-purpose motion plugin                             |
+| [kana/vim-niceblock]         | Make blockwise Visual mode more useful                    |
+| [haya14busa/vim-edgemotion]  | Jump to the edge of block                                 |
+| [folke/zen-mode.nvim]        | Distraction-free coding for Neovim                        |
+| [folke/which-key.nvim]       | Create key bindings that stick                            |
+| [folke/todo-comments.nvim]   | Highlight, list and search todo comments in your projects |
+| [folke/trouble.nvim]         | Pretty lists to help you solve all code diagnostics       |
+| [akinsho/toggleterm.nvim]    | Persist and toggle multiple terminals                     |
+| [hedyhli/outline.nvim]       | Tree like view for symbols using LSP                      |
+| [s1n7ax/nvim-window-picker]  | Window picker                                             |
+| [rest-nvim/rest.nvim]        | Fast Neovim http client written in Lua                    |
+| [mickael-menu/zk-nvim]       | Extension for the zk plain text note-taking assistant     |
+| [nvim-pack/nvim-spectre]     | Find the enemy and replace them with dark power           |
+| [echasnovski/mini.bufremove] | Helper for removing buffers                               |
+| [mzlogin/vim-markdown-toc]   | Generate table of contents for Markdown files             |
 
 ### Coding Plugins
 
@@ -636,7 +635,7 @@ _Note_ that 95% of the plugins are **lazy-loaded**.
 [folke/todo-comments.nvim]: https://github.com/folke/todo-comments.nvim
 [folke/trouble.nvim]: https://github.com/folke/trouble.nvim
 [akinsho/toggleterm.nvim]: https://github.com/akinsho/toggleterm.nvim
-[simrat39/symbols-outline.nvim]: https://github.com/simrat39/symbols-outline.nvim
+[hedyhli/outline.nvim]: https://github.com/hedyhli/outline.nvim
 [s1n7ax/nvim-window-picker]: https://github.com/s1n7ax/nvim-window-picker
 [rest-nvim/rest.nvim]: https://github.com/rest-nvim/rest.nvim
 [mickael-menu/zk-nvim]: https://github.com/mickael-menu/zk-nvim
@@ -1058,36 +1057,36 @@ Note that,
 
 ### Custom Tools & Plugins
 
-| Key                                      | Mode | Action                                            | Plugin or Mapping                              |
-| ---------------------------------------- | :--: | ------------------------------------------------- | ---------------------------------------------- |
-| <kbd>;</kbd>+<kbd>c</kbd>                |  𝐍   | Open context-menu                                 | <small>[lua/rafi/lib/contextmenu.lua]</small>  |
-| <kbd>g</kbd><kbd>Ctrl</kbd>+<kbd>o</kbd> |  𝐍   | Navigate to previous file on jumplist             | <small>[lib/edit.lua]</small>                  |
-| <kbd>g</kbd><kbd>Ctrl</kbd>+<kbd>i</kbd> |  𝐍   | Navigate to next file on jumplist                 | <small>[lib/edit.lua]</small>                  |
-| <kbd>s</kbd>+<kbd>p</kbd>                |  𝐍   | Choose a window to edit                           | <small>[s1n7ax/nvim-window-picker]</small>     |
-| <kbd>s</kbd>+<kbd>w</kbd>                |  𝐍   | Switch editing window with selected               | <small>[s1n7ax/nvim-window-picker]</small>     |
-| <kbd>Space</kbd> <kbd>l</kbd>            |  𝐍   | Open Lazy                                         | <small>[folke/lazy.nvim]</small>               |
-| <kbd>Space</kbd> <kbd>o</kbd>            |  𝐍   | Open structure window                             | <small>[simrat39/symbols-outline.nvim]</small> |
-| <kbd>Space</kbd> <kbd>f</kbd>            |  𝐍   | Show current structure scope in winbar            | <small>[SmiteshP/nvim-navic]</small>           |
-| <kbd>Space</kbd> <kbd>?</kbd>            |  𝐍   | Open the macOS dictionary on current word         | <small>`:!open dict://`</small>                |
-| <kbd>Space</kbd> <kbd>P</kbd>            |  𝐍   | Use Marked 2 for real-time Markdown preview       | <small>[Marked 2]</small>                      |
-| <kbd>Space</kbd> <kbd>cp</kbd>           |  𝐍   | Open color-picker                                 | <small>[uga-rosa/ccc.nvim]</small>             |
-| <kbd>Space</kbd> <kbd>tt</kbd>           |  𝐍   | Open terminal (root dir)                          | <small>[config/keymaps.lua]</small>            |
-| <kbd>Space</kbd> <kbd>tT</kbd>           |  𝐍   | Open terminal (cwd)                               | <small>[config/keymaps.lua]</small>            |
-| <kbd>Space</kbd> <kbd>tg</kbd>           |  𝐍   | Open Lazygit (root dir)                           | <small>[config/keymaps.lua]</small>            |
-| <kbd>Space</kbd> <kbd>tG</kbd>           |  𝐍   | Open Lazygit (cwd)                                | <small>[config/keymaps.lua]</small>            |
-| <kbd>Space</kbd> <kbd>cc</kbd>           |  𝐍   | Generate doc                                      | <small>[danymat/neogen]</small>                |
-| <kbd>Space</kbd> <kbd>gu</kbd>           |  𝐍   | Open undo-tree                                    | <small>[mbbill/undotree]</small>               |
-| <kbd>Space</kbd> <kbd>gd</kbd>           |  𝐍   | Git diff                                          | <small>[sindrets/diffview.nvim]</small>        |
-| <kbd>Space</kbd> <kbd>gb</kbd>           |  𝐍   | Git blame                                         | <small>[FabijanZulj/blame.nvim]</small>        |
-| <kbd>Space</kbd> <kbd>go</kbd>           | 𝐍 𝐕  | Open SCM detailed URL in browser                  | <small>[ruifm/gitlinker.nvim]</small>          |
-| <kbd>Space</kbd> <kbd>ml</kbd>           |  𝐍   | Append modeline to end of buffer                  | <small>[config/keymaps.lua]</small>            |
-| <kbd>Space</kbd> <kbd>mda</kbd>          |  𝐕   | Sequentially mark region for diff                 | <small>[AndrewRadev/linediff.vim]</small>      |
-| <kbd>Space</kbd> <kbd>mdf</kbd>          |  𝐕   | Mark region for diff and compare if more than one | <small>[AndrewRadev/linediff.vim]</small>      |
-| <kbd>Space</kbd> <kbd>mds</kbd>          |  𝐍   | Shows the comparison for all marked regions       | <small>[AndrewRadev/linediff.vim]</small>      |
-| <kbd>Space</kbd> <kbd>mdr</kbd>          |  𝐍   | Removes the signs denoting the diff regions       | <small>[AndrewRadev/linediff.vim]</small>      |
-| <kbd>Space</kbd> <kbd>mh</kbd>           |  𝐍   | Open HTTP Rest UI                                 | <small>[rest-nvim/rest.nvim]</small>           |
-| <kbd>Space</kbd> <kbd>mt</kbd>           | 𝐍 𝐕  | Toggle highlighted word                           | <small>[t9md/vim-quickhl]</small>              |
-| <kbd>Space</kbd> <kbd>zz</kbd>           |  𝐍   | Toggle distraction-free writing                   | <small>[folke/zen-mode.nvim]</small>           |
+| Key                                      | Mode | Action                                            | Plugin or Mapping                             |
+| ---------------------------------------- | :--: | ------------------------------------------------- | --------------------------------------------- |
+| <kbd>;</kbd>+<kbd>c</kbd>                |  𝐍   | Open context-menu                                 | <small>[lua/rafi/lib/contextmenu.lua]</small> |
+| <kbd>g</kbd><kbd>Ctrl</kbd>+<kbd>o</kbd> |  𝐍   | Navigate to previous file on jumplist             | <small>[lib/edit.lua]</small>                 |
+| <kbd>g</kbd><kbd>Ctrl</kbd>+<kbd>i</kbd> |  𝐍   | Navigate to next file on jumplist                 | <small>[lib/edit.lua]</small>                 |
+| <kbd>s</kbd>+<kbd>p</kbd>                |  𝐍   | Choose a window to edit                           | <small>[s1n7ax/nvim-window-picker]</small>    |
+| <kbd>s</kbd>+<kbd>w</kbd>                |  𝐍   | Switch editing window with selected               | <small>[s1n7ax/nvim-window-picker]</small>    |
+| <kbd>Space</kbd> <kbd>l</kbd>            |  𝐍   | Open Lazy                                         | <small>[folke/lazy.nvim]</small>              |
+| <kbd>Space</kbd> <kbd>o</kbd>            |  𝐍   | Open structure window                             | <small>[hedyhli/outline.nvim]</small>         |
+| <kbd>Space</kbd> <kbd>f</kbd>            |  𝐍   | Show current structure scope in winbar            | <small>[SmiteshP/nvim-navic]</small>          |
+| <kbd>Space</kbd> <kbd>?</kbd>            |  𝐍   | Open the macOS dictionary on current word         | <small>`:!open dict://`</small>               |
+| <kbd>Space</kbd> <kbd>P</kbd>            |  𝐍   | Use Marked 2 for real-time Markdown preview       | <small>[Marked 2]</small>                     |
+| <kbd>Space</kbd> <kbd>cp</kbd>           |  𝐍   | Open color-picker                                 | <small>[uga-rosa/ccc.nvim]</small>            |
+| <kbd>Space</kbd> <kbd>tt</kbd>           |  𝐍   | Open terminal (root dir)                          | <small>[config/keymaps.lua]</small>           |
+| <kbd>Space</kbd> <kbd>tT</kbd>           |  𝐍   | Open terminal (cwd)                               | <small>[config/keymaps.lua]</small>           |
+| <kbd>Space</kbd> <kbd>tg</kbd>           |  𝐍   | Open Lazygit (root dir)                           | <small>[config/keymaps.lua]</small>           |
+| <kbd>Space</kbd> <kbd>tG</kbd>           |  𝐍   | Open Lazygit (cwd)                                | <small>[config/keymaps.lua]</small>           |
+| <kbd>Space</kbd> <kbd>cc</kbd>           |  𝐍   | Generate doc                                      | <small>[danymat/neogen]</small>               |
+| <kbd>Space</kbd> <kbd>gu</kbd>           |  𝐍   | Open undo-tree                                    | <small>[mbbill/undotree]</small>              |
+| <kbd>Space</kbd> <kbd>gd</kbd>           |  𝐍   | Git diff                                          | <small>[sindrets/diffview.nvim]</small>       |
+| <kbd>Space</kbd> <kbd>gb</kbd>           |  𝐍   | Git blame                                         | <small>[FabijanZulj/blame.nvim]</small>       |
+| <kbd>Space</kbd> <kbd>go</kbd>           | 𝐍 𝐕  | Open SCM detailed URL in browser                  | <small>[ruifm/gitlinker.nvim]</small>         |
+| <kbd>Space</kbd> <kbd>ml</kbd>           |  𝐍   | Append modeline to end of buffer                  | <small>[config/keymaps.lua]</small>           |
+| <kbd>Space</kbd> <kbd>mda</kbd>          |  𝐕   | Sequentially mark region for diff                 | <small>[AndrewRadev/linediff.vim]</small>     |
+| <kbd>Space</kbd> <kbd>mdf</kbd>          |  𝐕   | Mark region for diff and compare if more than one | <small>[AndrewRadev/linediff.vim]</small>     |
+| <kbd>Space</kbd> <kbd>mds</kbd>          |  𝐍   | Shows the comparison for all marked regions       | <small>[AndrewRadev/linediff.vim]</small>     |
+| <kbd>Space</kbd> <kbd>mdr</kbd>          |  𝐍   | Removes the signs denoting the diff regions       | <small>[AndrewRadev/linediff.vim]</small>     |
+| <kbd>Space</kbd> <kbd>mh</kbd>           |  𝐍   | Open HTTP Rest UI                                 | <small>[rest-nvim/rest.nvim]</small>          |
+| <kbd>Space</kbd> <kbd>mt</kbd>           | 𝐍 𝐕  | Toggle highlighted word                           | <small>[t9md/vim-quickhl]</small>             |
+| <kbd>Space</kbd> <kbd>zz</kbd>           |  𝐍   | Toggle distraction-free writing                   | <small>[folke/zen-mode.nvim]</small>          |
 
 ### Window Management
 

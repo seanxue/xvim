@@ -352,31 +352,20 @@ return {
 
 	-----------------------------------------------------------------------------
 	{
-		"simrat39/symbols-outline.nvim",
-		cmd = { "SymbolsOutline", "SymbolsOutlineOpen" },
+		"hedyhli/outline.nvim",
+		lazy = true,
+		cmd = { "Outline", "OutlineOpen" },
 		keys = {
-			{ "<Leader>o", "<cmd>SymbolsOutline<CR>", desc = "Symbols Outline" },
+			{ "<leader>o", "<cmd>Outline<CR>", desc = "Toggle outline" },
 		},
 		opts = {
-			width = 30,
-			autofold_depth = 3,
-			keymaps = {
-				hover_symbol = "K",
-				toggle_preview = "p",
+			symbol_folding = {
+				autofold_depth = 1,
+				auto_unfold = {
+					hovered = true,
+				},
 			},
 		},
-		init = function()
-			-- TODO: apply symbols from rafi.config
-			-- require('rafi.config').icons.kinds)
-			vim.api.nvim_create_autocmd("FileType", {
-				group = vim.api.nvim_create_augroup("rafi_outline", {}),
-				pattern = "Outline",
-				callback = function()
-					vim.opt_local.winhighlight = "CursorLine:WildMenu"
-					vim.opt_local.signcolumn = "auto"
-				end,
-			})
-		end,
 	},
 
 	-----------------------------------------------------------------------------
