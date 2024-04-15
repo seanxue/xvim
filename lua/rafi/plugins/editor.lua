@@ -419,6 +419,9 @@ return {
 			{ "<Leader>mh", "<Plug>RestNvim", desc = "Execute HTTP request" },
 		},
 		opts = { skip_ssl_verification = true },
+		config = function(_, opts)
+			require("rest-nvim").setup(opts)
+		end,
 	},
 
 	-----------------------------------------------------------------------------
