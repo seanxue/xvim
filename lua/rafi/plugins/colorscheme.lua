@@ -4,27 +4,20 @@
 return {
 
 	{
-		'rafi/theme-loader.nvim',
+		"rafi/theme-loader.nvim",
 		lazy = false,
 		priority = 99,
-		opts = { initial_colorscheme = 'neohybrid' },
+		opts = { initial_colorscheme = "neohybrid" },
 	},
 
-	{ 'rafi/neo-hybrid.vim', priority = 100, lazy = false },
-	{ 'rafi/awesome-vim-colorschemes', lazy = false },
-	{ 'AlexvZyl/nordic.nvim' },
-	{ 'folke/tokyonight.nvim', opts = { style = 'night' } },
-	{ 'rebelot/kanagawa.nvim' },
-	{ 'olimorris/onedarkpro.nvim' },
-	{ 'EdenEast/nightfox.nvim' },
-	{ 'nyoom-engineering/oxocarbon.nvim' },
+	{ "rafi/awesome-vim-colorschemes", lazy = false },
 
 	{
-		'catppuccin/nvim',
+		"catppuccin/nvim",
 		lazy = true,
-		name = 'catppuccin',
+		name = "catppuccin",
 		opts = {
-			flavour = 'mocha', -- latte, frappe, macchiato, mocha
+			flavour = "mocha", -- latte, frappe, macchiato, mocha
 			dim_inactive = { enabled = false },
 			integrations = {
 				alpha = true,
@@ -40,16 +33,16 @@ return {
 				native_lsp = {
 					enabled = true,
 					virtual_text = {
-						errors = { 'italic' },
-						hints = { 'italic' },
-						warnings = { 'italic' },
-						information = { 'italic' },
+						errors = { "italic" },
+						hints = { "italic" },
+						warnings = { "italic" },
+						information = { "italic" },
 					},
 					underlines = {
-						errors = { 'undercurl' },
-						hints = { 'undercurl' },
-						warnings = { 'undercurl' },
-						information = { 'undercurl' },
+						errors = { "undercurl" },
+						hints = { "undercurl" },
+						warnings = { "undercurl" },
+						information = { "undercurl" },
 					},
 					inlay_hints = {
 						background = true,
