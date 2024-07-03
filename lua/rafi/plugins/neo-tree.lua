@@ -16,7 +16,7 @@ local toggle_width = function()
 	else
 		new_width = winwidth
 	end
-	vim.cmd(new_width .. ' wincmd |')
+	vim.cmd(new_width .. " wincmd |")
 end
 
 -- Get current opened directory from state.
@@ -25,9 +25,9 @@ end
 local function get_current_directory(state)
 	local node = state.tree:get_node()
 	local path = node.path
-	if node.type ~= 'directory' or not node:is_expanded() then
+	if node.type ~= "directory" or not node:is_expanded() then
 		local path_separator = package.config:sub(1, 1)
-		path = path:match('(.*)' .. path_separator)
+		path = path:match("(.*)" .. path_separator)
 	end
 	return path
 end
@@ -35,22 +35,25 @@ end
 return {
 
 	-----------------------------------------------------------------------------
-	'nvim-neo-tree/neo-tree.nvim',
+	"nvim-neo-tree/neo-tree.nvim",
+	branch = "v3.x",
 	dependencies = {
-		'MunifTanjim/nui.nvim',
-		's1n7ax/nvim-window-picker',
+		"nvim-lua/plenary.nvim",
+		"nvim-tree/nvim-web-devicons",
+		"MunifTanjim/nui.nvim",
+		"s1n7ax/nvim-window-picker",
 	},
-	cmd = 'Neotree',
+	cmd = "Neotree",
 	keys = {
 		{
-			'<LocalLeader>e',
-			'<cmd>Neotree filesystem left toggle dir=./<CR>',
-			desc = 'Explorer NeoTree Toggle',
+			"<LocalLeader>e",
+			"<cmd>Neotree filesystem left toggle dir=./<CR>",
+			desc = "Explorer NeoTree Toggle",
 		},
 		{
-			'<LocalLeader>a',
-			'<cmd>Neotree filesystem left reveal dir=./<CR>',
-			desc = 'Explorer NeoTree Reveal',
+			"<LocalLeader>a",
+			"<cmd>Neotree filesystem left reveal dir=./<CR>",
+			desc = "Explorer NeoTree Reveal",
 		},
 	},
 	deactivate = function()
@@ -60,8 +63,8 @@ return {
 		vim.g.neo_tree_remove_legacy_commands = 1
 		if vim.fn.argc() == 1 then
 			local stat = vim.loop.fs_stat(tostring(vim.fn.argv(0)))
-			if stat and stat.type == 'directory' then
-				require('neo-tree')
+			if stat and stat.type == "directory" then
+				require("neo-tree")
 			end
 		end
 	end,
@@ -74,18 +77,18 @@ return {
 			show_scrolled_off_parent_node = true,
 			padding = { left = 1, right = 0 },
 			sources = {
-				{ source = 'filesystem', display_name = '  Files' },   --       
-				{ source = 'buffers',    display_name = '  Buffers' }, --        
-				{ source = 'git_status', display_name = ' 󰊢 Git' },     -- 󰊢      
+				{ source = "filesystem", display_name = "  Files" }, --       
+				{ source = "buffers", display_name = "  Buffers" }, --        
+				{ source = "git_status", display_name = " 󰊢 Git" }, -- 󰊢      
 			},
 		},
 
 		event_handlers = {
 			-- Close neo-tree when opening a file.
 			{
-				event = 'file_opened',
+				event = "file_opened",
 				handler = function()
-					require('neo-tree').close_all()
+					require("neo-tree").close_all()
 				end,
 			},
 		},
@@ -95,14 +98,14 @@ return {
 				padding = 0,
 			},
 			icon = {
-				folder_closed = '',
-				folder_open = '',
-				folder_empty = '',
-				folder_empty_open = '',
-				default = '',
+				folder_closed = "",
+				folder_open = "",
+				folder_empty = "",
+				folder_empty_open = "",
+				default = "",
 			},
 			modified = {
-				symbol = '•',
+				symbol = "•",
 			},
 			name = {
 				trailing_slash = true,
@@ -112,84 +115,84 @@ return {
 			git_status = {
 				symbols = {
 					-- Change type
-					added = 'A',
-					deleted = 'D',
-					modified = 'M',
-					renamed = 'R',
+					added = "A",
+					deleted = "D",
+					modified = "M",
+					renamed = "R",
 					-- Status type
-					untracked = 'U',
-					ignored = 'I',
-					unstaged = '',
-					staged = 'S',
-					conflict = 'C',
+					untracked = "U",
+					ignored = "I",
+					unstaged = "",
+					staged = "S",
+					conflict = "C",
 				},
 			},
 		},
 		window = {
 			width = winwidth,
 			mappings = {
-				['q'] = 'close_window',
-				['?'] = 'noop',
-				['<Space>'] = 'noop',
+				["q"] = "close_window",
+				["?"] = "noop",
+				["<Space>"] = "noop",
 
-				['g?'] = 'show_help',
-				['<2-LeftMouse>'] = 'open',
-				['<CR>'] = 'open_with_window_picker',
-				['l'] = 'open_drop',
-				['h'] = 'close_node',
-				['C'] = 'close_node',
-				['z'] = 'close_all_nodes',
-				['<C-r>'] = 'refresh',
+				["g?"] = "show_help",
+				["<2-LeftMouse>"] = "open",
+				["<CR>"] = "open_with_window_picker",
+				["l"] = "open_drop",
+				["h"] = "close_node",
+				["C"] = "close_node",
+				["z"] = "close_all_nodes",
+				["<C-r>"] = "refresh",
 
-				['s'] = 'noop',
-				['sv'] = 'open_split',
-				['sg'] = 'open_vsplit',
-				['st'] = 'open_tabnew',
+				["s"] = "noop",
+				["sv"] = "open_split",
+				["sg"] = "open_vsplit",
+				["st"] = "open_tabnew",
 
-				['c'] = { 'copy', config = { show_path = 'relative' } },
-				['m'] = { 'move', config = { show_path = 'relative' } },
-				['a'] = { 'add', nowait = true, config = { show_path = 'relative' } },
-				['N'] = { 'add_directory', config = { show_path = 'relative' } },
-				['d'] = 'noop',
-				['dd'] = 'delete',
-				['r'] = 'rename',
-				['y'] = 'copy_to_clipboard',
-				['x'] = 'cut_to_clipboard',
-				['P'] = 'paste_from_clipboard',
-				['<S-Tab>'] = 'prev_source',
-				['<Tab>'] = 'next_source',
+				["c"] = { "copy", config = { show_path = "relative" } },
+				["m"] = { "move", config = { show_path = "relative" } },
+				["a"] = { "add", nowait = true, config = { show_path = "relative" } },
+				["N"] = { "add_directory", config = { show_path = "relative" } },
+				["d"] = "noop",
+				["dd"] = "delete",
+				["r"] = "rename",
+				["y"] = "copy_to_clipboard",
+				["x"] = "cut_to_clipboard",
+				["P"] = "paste_from_clipboard",
+				["<S-Tab>"] = "prev_source",
+				["<Tab>"] = "next_source",
 
-				['p'] = {
-					'toggle_preview',
+				["p"] = {
+					"toggle_preview",
 					nowait = true,
 					config = { use_float = true },
 				},
 
-				['W'] = toggle_width,
+				["W"] = toggle_width,
 			},
 		},
 		filesystem = {
 			window = {
 				mappings = {
-					['H'] = 'toggle_hidden',
-					['/'] = 'noop',
-					['f'] = 'fuzzy_finder',
-					['F'] = 'filter_on_submit',
-					['<C-x>'] = 'clear_filter',
-					['<C-c>'] = 'clear_filter',
-					['<BS>'] = 'navigate_up',
-					['.'] = 'set_root',
-					['[g'] = 'prev_git_modified',
-					[']g'] = 'next_git_modified',
+					["H"] = "toggle_hidden",
+					["/"] = "noop",
+					["f"] = "fuzzy_finder",
+					["F"] = "filter_on_submit",
+					["<C-x>"] = "clear_filter",
+					["<C-c>"] = "clear_filter",
+					["<BS>"] = "navigate_up",
+					["."] = "set_root",
+					["[g"] = "prev_git_modified",
+					["]g"] = "next_git_modified",
 
-					['gf'] = function(state)
-						require('telescope.builtin').find_files({
+					["gf"] = function(state)
+						require("telescope.builtin").find_files({
 							cwd = get_current_directory(state),
 						})
 					end,
 
-					['gr'] = function(state)
-						require('telescope.builtin').live_grep({
+					["gr"] = function(state)
+						require("telescope.builtin").live_grep({
 							cwd = get_current_directory(state),
 						})
 					end,
@@ -199,8 +202,8 @@ return {
 			use_libuv_file_watcher = true,
 			bind_to_cwd = false,
 			cwd_target = {
-				sidebar = 'window',
-				current = 'window',
+				sidebar = "window",
+				current = "window",
 			},
 
 			filtered_items = {
@@ -209,30 +212,30 @@ return {
 				hide_dotfiles = false,
 				hide_gitignored = false,
 				hide_by_name = {
-					'.git',
-					'.hg',
-					'.svc',
-					'.DS_Store',
-					'thumbs.db',
-					'.sass-cache',
-					'node_modules',
-					'.pytest_cache',
-					'.mypy_cache',
-					'__pycache__',
-					'.stfolder',
-					'.stversions',
+					".git",
+					".hg",
+					".svc",
+					".DS_Store",
+					"thumbs.db",
+					".sass-cache",
+					"node_modules",
+					".pytest_cache",
+					".mypy_cache",
+					"__pycache__",
+					".stfolder",
+					".stversions",
 				},
 				never_show = {},
-				always_show = { '.gitconfig'},
+				always_show = { ".gitconfig" },
 			},
 		},
 		buffers = {
 			bind_to_cwd = false,
 			window = {
 				mappings = {
-					['<BS>'] = 'navigate_up',
-					['.'] = 'set_root',
-					['dd'] = 'buffer_delete',
+					["<BS>"] = "navigate_up",
+					["."] = "set_root",
+					["dd"] = "buffer_delete",
 				},
 			},
 		},
