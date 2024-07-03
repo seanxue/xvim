@@ -36,9 +36,9 @@ local defaults = {
 	icons = {
 		git = ' ',
 		diagnostics = {
-			Error = '✘', --   ✘
+			Error = '', --   ✘
 			Warn = '󰀪',  -- 󰀪 󰳤 󱦄 󱗓 
-			Info = 'ⁱ',  --    ⁱ 󰋼 󰋽
+			Info = '󰋽',  --    ⁱ 󰋼 󰋽
 			Hint = '',  --  󰌶 
 		},
 		status = {
@@ -62,7 +62,7 @@ local defaults = {
 		-- Default completion kind symbols.
 		kinds = {
 			Array = '󰅪 ',  --  󰅪 󰅨 󱃶
-			Boolean = '◩ ',  --  ◩ 󰔡 󱃙 󰟡 󰨙
+			Boolean = '󰨙 ',  --  ◩ 󰔡 󱃙 󰟡 󰨙
 			Class = '󰌗 ', --  󰌗 󰠱 𝓒
 			Color = '󰏘 ', -- 󰸌 󰏘
 			Constant = '󰏿 ', --   󰏿

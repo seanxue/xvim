@@ -359,6 +359,9 @@ return {
 			{ "<leader>o", "<cmd>Outline<CR>", desc = "Toggle outline" },
 		},
 		opts = {
+			outline_window = {
+				auto_jump = true,
+			},
 			symbol_folding = {
 				autofold_depth = 1,
 				auto_unfold = {
@@ -404,7 +407,7 @@ return {
 			filter_rules = {
 				include_current_win = true,
 				bo = {
-					filetype = { "notify", "noice", "incline", "neo-tree" },
+					filetype = { "notify", "noice", "incline", "neo-tree", "outline" },
 					buftype = {},
 				},
 			},
@@ -422,25 +425,6 @@ return {
 		config = function(_, opts)
 			require("rest-nvim").setup(opts)
 		end,
-	},
-
-	-----------------------------------------------------------------------------
-	{
-		"mickael-menu/zk-nvim",
-		name = "zk",
-		ft = "markdown",
-		cmd = { "ZkNew", "ZkNotes", "ZkTags", "ZkMatch" },
-		-- stylua: ignore
-		keys = {
-			{ '<leader>zn', "<Cmd>ZkNew { title = vim.fn.input('Title: ') }<CR>", desc = 'Zk New' },
-			{ '<leader>zo', "<Cmd>ZkNotes { sort = { 'modified' } }<CR>", desc = 'Zk Notes' },
-			{ '<leader>zt', '<Cmd>ZkTags<CR>', desc = 'Zk Tags' },
-			{ '<leader>zf', "<Cmd>ZkNotes { sort = { 'modified' }, match = vim.fn.input('Search: ') }<CR>", desc = 'Zk Search' },
-			{ '<leader>zf', ":'<,'>ZkMatch<CR>", mode = 'x', desc = 'Zk Match' },
-			{ '<leader>zb', '<Cmd>ZkBacklinks<CR>', desc = 'Zk Backlinks' },
-			{ '<leader>zl', '<Cmd>ZkLinks<CR>', desc = 'Zk Links' },
-		},
-		opts = { picker = "telescope" },
 	},
 
 	-----------------------------------------------------------------------------
