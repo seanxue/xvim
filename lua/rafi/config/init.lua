@@ -281,7 +281,6 @@ function M.lazy_notify()
 end
 
 -- Join paths.
----@private
 M.path_join = function(...)
 	return table.concat({ ... }, M.path_sep)
 end
