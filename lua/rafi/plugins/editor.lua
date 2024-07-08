@@ -172,7 +172,6 @@ return {
 	{
 		"ggandor/flit.nvim",
 		keys = function()
-			---@type LazyKeys[]
 			local ret = {}
 			for _, key in ipairs({ "f", "F", "t", "T" }) do
 				ret[#ret + 1] = { key, mode = { "n", "x", "o" }, desc = key }
@@ -287,16 +286,16 @@ return {
 	{
 		"folke/trouble.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
-		cmd = { "Trouble", "TroubleToggle" },
-		opts = { use_diagnostic_signs = true },
+		cmd = { "Trouble" },
+		opts = {},
 		-- stylua: ignore
 		keys = {
-			{ '<leader>e', '<cmd>TroubleToggle document_diagnostics<CR>', noremap = true, desc = 'Document Diagnostics' },
-			{ '<leader>r', '<cmd>TroubleToggle workspace_diagnostics<CR>', noremap = true, desc = 'Workspace Diagnostics' },
-			{ '<leader>xx', '<cmd>TroubleToggle document_diagnostics<cr>', desc = 'Document Diagnostics (Trouble)' },
-			{ '<leader>xX', '<cmd>TroubleToggle workspace_diagnostics<cr>', desc = 'Workspace Diagnostics (Trouble)' },
-			{ '<leader>xQ', '<cmd>TroubleToggle quickfix<cr>', desc = 'Quickfix List (Trouble)' },
-			{ '<leader>xL', '<cmd>TroubleToggle loclist<cr>', desc = 'Location List (Trouble)' },
+			{ '<leader>e', '<cmd>Trouble diagnostics toggle filter.buf=0<CR>', desc = 'Document Diagnostics' },
+			{ '<leader>r', '<cmd>Trouble diagnostics toggle<CR>', desc = 'Workspace Diagnostics' },
+			{ '<leader>xx', '<cmd>Trouble diagnostics toggle focus=true filter.buf=0<CR>', desc = 'Document Diagnostics' },
+			{ '<leader>xX', '<cmd>Trouble diagnostics toggle focus=true<CR>', desc = 'Workspace Diagnostics' },
+			{ '<leader>xQ', '<cmd>Trouble qflist toggle<cr>', desc = 'Quickfix List (Trouble)' },
+			{ '<leader>xL', '<cmd>Trouble loclist toggle<cr>', desc = 'Location List (Trouble)' },
 			{
 				'[q',
 				function()

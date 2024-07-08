@@ -8,12 +8,12 @@
 local myactions = {}
 
 function myactions.send_to_qflist(prompt_bufnr)
-	require('telescope.actions').send_to_qflist(prompt_bufnr)
+	require("telescope.actions").send_to_qflist(prompt_bufnr)
 	vim.api.nvim_command([[ botright copen ]])
 end
 
 function myactions.smart_send_to_qflist(prompt_bufnr)
-	require('telescope.actions').smart_send_to_qflist(prompt_bufnr)
+	require("telescope.actions").smart_send_to_qflist(prompt_bufnr)
 	vim.api.nvim_command([[ botright copen ]])
 end
 
@@ -32,28 +32,25 @@ end
 ---@param prompt_bufnr number: The prompt bufnr
 ---@param direction number: 1|-1
 function myactions.scroll_results(prompt_bufnr, direction)
-	local status = require('telescope.state').get_status(prompt_bufnr)
+	local status = require("telescope.state").get_status(prompt_bufnr)
 	local default_speed = vim.api.nvim_win_get_height(status.results_win) / 2
 	local speed = status.picker.layout_config.scroll_speed or default_speed
 
-	require('telescope.actions.set').shift_selection(
-		prompt_bufnr,
-		math.floor(speed) * direction
-	)
+	require("telescope.actions.set").shift_selection(prompt_bufnr, math.floor(speed) * direction)
 end
 
 -- Custom pickers
 
 local plugin_directories = function(opts)
-	local actions = require('telescope.actions')
-	local utils = require('telescope.utils')
-	local dir = vim.fn.stdpath('data') .. '/lazy'
+	local actions = require("telescope.actions")
+	local utils = require("telescope.utils")
+	local dir = vim.fn.stdpath("data") .. "/lazy"
 
 	opts = opts or {}
 	opts.cmd = vim.F.if_nil(opts.cmd, {
 		vim.o.shell,
-		'-c',
-		'find ' .. vim.fn.shellescape(dir) .. ' -mindepth 1 -maxdepth 1 -type d',
+		"-c",
+		"find " .. vim.fn.shellescape(dir) .. " -mindepth 1 -maxdepth 1 -type d",
 	})
 
 	local dir_len = dir:len()
@@ -65,22 +62,22 @@ local plugin_directories = function(opts)
 		}
 	end
 
-	require('telescope.pickers')
+	require("telescope.pickers")
 		.new(opts, {
 			layout_config = {
 				width = 0.65,
 				height = 0.7,
 			},
-			prompt_title = '[ Plugin directories ]',
-			finder = require('telescope.finders').new_table({
+			prompt_title = "[ Plugin directories ]",
+			finder = require("telescope.finders").new_table({
 				results = utils.get_os_command_output(opts.cmd),
 				entry_maker = opts.entry_maker,
 			}),
-			sorter = require('telescope.sorters').get_fuzzy_file(),
-			previewer = require('telescope.previewers.term_previewer').cat.new(opts),
+			sorter = require("telescope.sorters").get_fuzzy_file(),
+			previewer = require("telescope.previewers.term_previewer").cat.new(opts),
 			attach_mappings = function(prompt_bufnr)
 				actions.select_default:replace(function()
-					local entry = require('telescope.actions.state').get_selected_entry()
+					local entry = require("telescope.actions.state").get_selected_entry()
 					actions.close(prompt_bufnr)
 					vim.cmd.tcd(entry.value)
 				end)
@@ -96,7 +93,7 @@ end
 ---@return float
 local function get_matched_ratio(dimensions, size)
 	for min_cols, scale in pairs(dimensions) do
-		if min_cols == 'lower' or size >= min_cols then
+		if min_cols == "lower" or size >= min_cols then
 			return math.floor(size * scale)
 		end
 	end
@@ -120,14 +117,14 @@ local function width_large(_, cols, _)
 end
 
 -- Enable indent-guides in telescope preview
-vim.api.nvim_create_autocmd('User', {
-	pattern = 'TelescopePreviewerLoaded',
-	group = vim.api.nvim_create_augroup('rafi_telescope', {}),
+vim.api.nvim_create_autocmd("User", {
+	pattern = "TelescopePreviewerLoaded",
+	group = vim.api.nvim_create_augroup("rafi_telescope", {}),
 	callback = function(args)
 		if args.buf ~= vim.api.nvim_win_get_buf(0) then
 			return
 		end
-		vim.opt_local.listchars = vim.wo.listchars .. ',tab:▏\\ '
+		vim.opt_local.listchars = vim.wo.listchars .. ",tab:▏\\ "
 		vim.opt_local.conceallevel = 0
 		vim.opt_local.wrap = true
 		vim.opt_local.list = true
@@ -141,20 +138,20 @@ return {
 
 	-----------------------------------------------------------------------------
 	{
-		'nvim-telescope/telescope.nvim',
-		cmd = 'Telescope',
-		commit = vim.fn.has('nvim-0.9') == 0 and '057ee0f8783' or nil,
+		"nvim-telescope/telescope.nvim",
+		cmd = "Telescope",
+		commit = vim.fn.has("nvim-0.9") == 0 and "057ee0f8783" or nil,
 		dependencies = {
-			'nvim-lua/plenary.nvim',
-			'nvim-telescope/telescope-fzf-native.nvim',
-			'jvgrootveld/telescope-zoxide',
-			'folke/todo-comments.nvim',
-			'rafi/telescope-thesaurus.nvim',
+			"nvim-lua/plenary.nvim",
+			"nvim-telescope/telescope-fzf-native.nvim",
+			"jvgrootveld/telescope-zoxide",
+			"folke/todo-comments.nvim",
+			"rafi/telescope-thesaurus.nvim",
 		},
 		config = function(_, opts)
-			require('telescope').setup(opts)
-			require('telescope').load_extension('persisted')
-			require('telescope').load_extension('fzf')
+			require("telescope").setup(opts)
+			require("telescope").load_extension("persisted")
+			require("telescope").load_extension("fzf")
 		end,
 		-- stylua: ignore
 		keys = {
@@ -324,50 +321,50 @@ return {
 
 		},
 		opts = function()
-			local transform_mod = require('telescope.actions.mt').transform_mod
-			local actions = require('telescope.actions')
+			local transform_mod = require("telescope.actions.mt").transform_mod
+			local actions = require("telescope.actions")
 
 			-- Transform to Telescope proper actions.
 			myactions = transform_mod(myactions)
 
 			-- Clone the default Telescope configuration and enable hidden files.
-			local has_ripgrep = vim.fn.executable('rg') == 1
+			local has_ripgrep = vim.fn.executable("rg") == 1
 			local vimgrep_args = {
-				unpack(require('telescope.config').values.vimgrep_arguments),
+				unpack(require("telescope.config").values.vimgrep_arguments),
 			}
-			table.insert(vimgrep_args, '--hidden')
-			table.insert(vimgrep_args, '--follow')
-			table.insert(vimgrep_args, '--glob')
-			table.insert(vimgrep_args, '!**/.git/*')
+			table.insert(vimgrep_args, "--hidden")
+			table.insert(vimgrep_args, "--follow")
+			table.insert(vimgrep_args, "--glob")
+			table.insert(vimgrep_args, "!**/.git/*")
 
 			local find_args = {
-				'rg',
-				'--vimgrep',
-				'--files',
-				'--follow',
-				'--hidden',
-				'--smart-case',
-				'--glob',
-				'!**/.git/*',
+				"rg",
+				"--vimgrep",
+				"--files",
+				"--follow",
+				"--hidden",
+				"--smart-case",
+				"--glob",
+				"!**/.git/*",
 			}
 
 			return {
 				defaults = {
-					sorting_strategy = 'ascending',
+					sorting_strategy = "ascending",
 					cache_picker = { num_pickers = 3 },
 
-					prompt_prefix = '  ', -- ❯  
-					selection_caret = '▍ ',
-					multi_icon = ' ',
+					prompt_prefix = "  ", -- ❯  
+					selection_caret = "▍ ",
+					multi_icon = " ",
 
-					path_display = { 'truncate' },
-					file_ignore_patterns = { 'node_modules' },
-					set_env = { COLORTERM = 'truecolor' },
+					path_display = { "truncate" },
+					file_ignore_patterns = { "node_modules" },
+					set_env = { COLORTERM = "truecolor" },
 					vimgrep_arguments = has_ripgrep and vimgrep_args or nil,
 
-					layout_strategy = 'horizontal',
+					layout_strategy = "horizontal",
 					layout_config = {
-						prompt_position = 'top',
+						prompt_position = "top",
 						horizontal = {
 							height = 0.85,
 						},
@@ -428,7 +425,7 @@ return {
 							['!'] = actions.edit_command_line,
 
 							['t'] = function(...)
-								return require('trouble.providers.telescope').open_with_trouble(...)
+								return require('trouble.sources.telescope').open(...)
 							end,
 
 							['p'] = function()
@@ -448,7 +445,7 @@ return {
 						layout_config = { width = width_large, height = 0.7 },
 						mappings = {
 							n = {
-								['dd'] = actions.delete_buffer,
+								["dd"] = actions.delete_buffer,
 							},
 						},
 					},
@@ -466,27 +463,27 @@ return {
 						layout_config = { preview_width = 0.7 },
 					},
 					vim_options = {
-						theme = 'dropdown',
+						theme = "dropdown",
 						layout_config = { width = width_medium, height = 0.7 },
 					},
 					command_history = {
-						theme = 'dropdown',
+						theme = "dropdown",
 						layout_config = { width = width_medium, height = 0.7 },
 					},
 					search_history = {
-						theme = 'dropdown',
+						theme = "dropdown",
 						layout_config = { width = width_small, height = 0.6 },
 					},
 					spell_suggest = {
-						theme = 'cursor',
+						theme = "cursor",
 						layout_config = { width = width_tiny, height = 0.45 },
 					},
 					registers = {
-						theme = 'cursor',
+						theme = "cursor",
 						layout_config = { width = 0.35, height = 0.4 },
 					},
 					oldfiles = {
-						theme = 'dropdown',
+						theme = "dropdown",
 						previewer = false,
 						layout_config = { width = width_medium, height = 0.7 },
 					},
@@ -500,12 +497,12 @@ return {
 						layout_config = { width = width_large, preview_width = 0.55 },
 					},
 					lsp_code_actions = {
-						theme = 'cursor',
+						theme = "cursor",
 						previewer = false,
 						layout_config = { width = 0.3, height = 0.4 },
 					},
 					lsp_range_code_actions = {
-						theme = 'cursor',
+						theme = "cursor",
 						previewer = false,
 						layout_config = { width = 0.3, height = 0.4 },
 					},
@@ -515,36 +512,31 @@ return {
 						layout_config = { width = 0.55, height = 0.55 },
 					},
 					zoxide = {
-						prompt_title = '[ Zoxide directories ]',
+						prompt_title = "[ Zoxide directories ]",
 						mappings = {
 							default = {
 								action = function(selection)
 									vim.cmd.tcd(selection.path)
 								end,
 								after_action = function(selection)
-									vim.notify(
-										"Current working directory set to '"
-											.. selection.path
-											.. "'",
-										vim.log.levels.INFO
-									)
+									vim.notify("Current working directory set to '" .. selection.path .. "'", vim.log.levels.INFO)
 								end,
 							},
 						},
 					},
 					fzf = {
-						fuzzy = true,                    -- false will only do exact matching
-						override_generic_sorter = true,  -- override the generic sorter
-						override_file_sorter = true,     -- override the file sorter
-						case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
-																						 -- the default case_mode is "smart_case"
-					}
+						fuzzy = true, -- false will only do exact matching
+						override_generic_sorter = true, -- override the generic sorter
+						override_file_sorter = true, -- override the file sorter
+						case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+						-- the default case_mode is "smart_case"
+					},
 				},
 			}
 		end,
 	},
 	{
-		'nvim-telescope/telescope-fzf-native.nvim',
-		build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
+		"nvim-telescope/telescope-fzf-native.nvim",
+		build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
 	},
 }
