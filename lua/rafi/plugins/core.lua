@@ -1,6 +1,6 @@
-require('rafi.config').init()
+require("rafi.config").init()
 
 return {
-	{ 'folke/lazy.nvim', version = '*' },
-	{ 'nvim-lua/plenary.nvim', lazy = false },
+	{ "folke/lazy.nvim" },
+	{ "nvim-lua/plenary.nvim", lazy = false },
 }

@@ -29,7 +29,15 @@ require("lazy").setup(vim.tbl_extend("keep", config.user_lazy_opts(), {
 	install = { missing = true, colorscheme = {} },
 	checker = { enabled = true, notify = false },
 	change_detection = { notify = false },
-	ui = { border = "rounded" },
+	ui = {
+		headless = {
+			process = false,
+			log = false,
+			task = false,
+			colors = false,
+		},
+		border = "rounded",
+	},
 	diff = { cmd = "terminal_git" },
 	performance = {
 		rtp = {
