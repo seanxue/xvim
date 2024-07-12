@@ -179,20 +179,6 @@ return {
 
 	-----------------------------------------------------------------------------
 	{
-		"FabijanZulj/blame.nvim",
-		cmd = "ToggleBlame",
-		-- stylua: ignore
-		keys = {
-			{ '<leader>gb', '<cmd>ToggleBlame virtual<CR>', desc = 'Git blame' },
-			{ '<leader>gB', '<cmd>ToggleBlame window<CR>', desc = 'Git blame (window)' },
-		},
-		opts = {
-			date_format = "%Y-%m-%d %H:%M",
-		},
-	},
-
-	-----------------------------------------------------------------------------
-	{
 		"rhysd/git-messenger.vim",
 		cmd = "GitMessenger",
 		keys = {
