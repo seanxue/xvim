@@ -237,32 +237,30 @@ return {
 		"folke/which-key.nvim",
 		event = "VeryLazy",
 		opts = {
-			icons = { separator = " 󰁔 " },
-			window = { winblend = 0 },
-			defaults = {
-				mode = { "n", "v" },
-				[";"] = { name = "+telescope" },
-				[";d"] = { name = "+lsp/todo" },
-				["g"] = { name = "+goto" },
-				["gz"] = { name = "+surround" },
-				["]"] = { name = "+next" },
-				["["] = { name = "+prev" },
-				["<leader>b"] = { name = "+buffer" },
-				["<leader>c"] = { name = "+code" },
-				["<leader>g"] = { name = "+git" },
-				["<leader>h"] = { name = "+hunks" },
-				["<leader>s"] = { name = "+search" },
-				["<leader>t"] = { name = "+toggle/tools" },
-				["<leader>u"] = { name = "+ui" },
-				["<leader>x"] = { name = "+diagnostics/quickfix" },
-				["<leader>z"] = { name = "+notes" },
+			win = {
+				wo = { winblend = 10 },
+			},
+			spec = {
+				{
+					mode = { "n", "v" },
+					{ ";", group = "+telescope" },
+					{ ";d", group = "+lsp/todo" },
+					{ "g", group = "+goto" },
+					{ "gz", group = "+surround" },
+					{ "]", group = "+next" },
+					{ "[", group = "+prev" },
+					{ "<leader>b", group = "+buffer" },
+					{ "<leader>c", group = "+code" },
+					{ "<leader>g", group = "+git" },
+					{ "<leader>h", group = "+hunks" },
+					{ "<leader>s", group = "+search" },
+					{ "<leader>t", group = "+toggle/tools" },
+					{ "<leader>u", group = "+ui" },
+					{ "<leader>x", group = "+diagnostics/quickfix" },
+					{ "<leader>z", group = "+notes" },
+				},
 			},
 		},
-		config = function(_, opts)
-			local wk = require("which-key")
-			wk.setup(opts)
-			wk.register(opts.defaults)
-		end,
 	},
 
 	-----------------------------------------------------------------------------
