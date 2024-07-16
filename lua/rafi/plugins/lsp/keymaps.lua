@@ -117,7 +117,7 @@ function M.resolve(buffer)
 	return keymaps
 end
 
----@param client lsp.Client
+---@param client vim.lsp.Client
 ---@param buffer integer
 function M.on_attach(client, buffer)
 	local Keys = require('lazy.core.handler.keys')

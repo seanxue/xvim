@@ -102,7 +102,7 @@ return {
 			require("rafi.plugins.lsp.format").setup(opts)
 			-- Setup formatting, keymaps and highlights.
 			local lsp_on_attach = require("rafi.lib.utils").on_attach
-			---@param client lsp.Client
+			---@param client vim.lsp.Client
 			---@param buffer integer
 			lsp_on_attach(function(client, buffer)
 				require("rafi.plugins.lsp.keymaps").on_attach(client, buffer)
@@ -120,7 +120,7 @@ return {
 			vim.lsp.handlers["client/registerCapability"] = function(err, res, ctx)
 				local ret = register_capability(err, res, ctx)
 				local client_id = ctx.client_id
-				---@type lsp.Client|nil
+				---@type vim.lsp.Client|nil
 				local client = vim.lsp.get_client_by_id(client_id)
 				local buffer = vim.api.nvim_get_current_buf()
 				if client ~= nil then

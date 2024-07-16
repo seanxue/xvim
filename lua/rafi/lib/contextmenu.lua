@@ -4,7 +4,7 @@
 local M = {}
 
 ---@param method string
----@param clients lsp.Client[]
+---@param clients vim.lsp.Client[]
 ---@return boolean
 local function supports_method(method, clients)
 	for _, client in pairs(clients) do
@@ -16,16 +16,12 @@ local function supports_method(method, clients)
 end
 
 M.show = function()
-	if vim.fn.has('nvim-0.8') ~= 1 then
-		vim.notify(
-			'You must be running Neovim ≥8.0',
-			vim.log.levels.WARN,
-			{ title = 'Contextmenu' }
-		)
+	if vim.fn.has("nvim-0.8") ~= 1 then
+		vim.notify("You must be running Neovim ≥8.0", vim.log.levels.WARN, { title = "Contextmenu" })
 		return
 	end
 
-	local cword = vim.fn.expand('<cword>')
+	local cword = vim.fn.expand("<cword>")
 	local bufnr = vim.api.nvim_get_current_buf()
 	local clients
 	if vim.lsp.get_clients ~= nil then
@@ -36,9 +32,9 @@ M.show = function()
 	end
 
 	-- Remove all menu options
-	pcall(vim.cmd.aunmenu, 'Context')
+	pcall(vim.cmd.aunmenu, "Context")
 
-	if cword == '' then
+	if cword == "" then
 		-- Cursor is on blank character.
 		vim.cmd([[
 			nmenu Context.Select\ All  ggVG
@@ -46,24 +42,18 @@ M.show = function()
 		]])
 	else
 		-- Add LSP methods, only if one of the servers support it.
-		if supports_method('textDocument/declaration', clients) then
-			vim.cmd(
-				'nmenu Context.Declaration <cmd>lua vim.lsp.buf.declaration()<CR>'
-			)
+		if supports_method("textDocument/declaration", clients) then
+			vim.cmd("nmenu Context.Declaration <cmd>lua vim.lsp.buf.declaration()<CR>")
 		end
-		if supports_method('textDocument/definition', clients) then
-			vim.cmd('nmenu Context.&Definition <cmd>lua vim.lsp.buf.definition()<CR>')
+		if supports_method("textDocument/definition", clients) then
+			vim.cmd("nmenu Context.&Definition <cmd>lua vim.lsp.buf.definition()<CR>")
 		end
 
-		if supports_method('textDocument/references', clients) then
-			vim.cmd(
-				'nmenu Context.&References… <cmd>lua vim.lsp.buf.references()<CR>'
-			)
+		if supports_method("textDocument/references", clients) then
+			vim.cmd("nmenu Context.&References… <cmd>lua vim.lsp.buf.references()<CR>")
 		end
-		if supports_method('textDocument/implementation', clients) then
-			vim.cmd(
-				'nmenu Context.Implementation <cmd>lua vim.lsp.buf.implementation()<CR>'
-			)
+		if supports_method("textDocument/implementation", clients) then
+			vim.cmd("nmenu Context.Implementation <cmd>lua vim.lsp.buf.implementation()<CR>")
 		end
 
 		if #clients > 0 then
@@ -88,7 +78,7 @@ M.show = function()
 		nmenu Context.Open\ in\ browser  <cmd>lua require('gitlinker').get_buf_range_url('n')<CR>
 	]])
 
-	pcall(vim.cmd.popup, 'Context')
+	pcall(vim.cmd.popup, "Context")
 end
 
 return M

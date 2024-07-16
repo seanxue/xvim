@@ -146,7 +146,7 @@ return {
 		init = function()
 			vim.g.navic_silence = true
 
-			---@param client lsp.Client
+			---@param client vim.lsp.Client
 			---@param buffer integer
 			require("rafi.lib.utils").on_attach(function(client, buffer)
 				if client.server_capabilities.documentSymbolProvider then

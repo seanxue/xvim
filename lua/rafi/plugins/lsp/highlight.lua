@@ -6,7 +6,7 @@
 
 local M = {}
 
----@param client lsp.Client
+---@param client vim.lsp.Client
 ---@param bufnr integer
 function M.on_attach(client, bufnr)
 	if require('rafi.lib.utils').has('vim-illuminate') then

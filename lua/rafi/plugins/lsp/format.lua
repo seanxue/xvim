@@ -108,9 +108,9 @@ function M.get_formatters(bufnr)
 
 	---@class LazyVimFormatters
 	local ret = {
-		---@type lsp.Client[]
+		---@type vim.lsp.Client[]
 		active = {},
-		---@type lsp.Client[]
+		---@type vim.lsp.Client[]
 		available = {},
 		null_ls = null_ls,
 	}
@@ -137,7 +137,7 @@ end
 
 -- Gets all lsp clients that support formatting
 -- and have not disabled it in their client config
----@param client lsp.Client
+---@param client vim.lsp.Client
 function M.supports_format(client)
 	if
 		client.config
