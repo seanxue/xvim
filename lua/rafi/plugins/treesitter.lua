@@ -189,7 +189,6 @@ return {
 				"scss",
 				"sql",
 				"svelte",
-				"terraform",
 				"todotxt",
 				"toml",
 				"tsx",
