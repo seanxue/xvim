@@ -5,8 +5,8 @@
 -- This is part of LazyVim's code, with my modifications.
 -- See: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/plugins/lsp/init.lua
 
-vim.lsp.set_log_level("off")
--- vim.lsp.set_log_level('TRACE')
+vim.lsp.set_log_level("WARN")
+-- vim.lsp.set_log_level("DEBUG")
 
 return {
 
@@ -15,8 +15,8 @@ return {
 		"neovim/nvim-lspconfig",
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
-			{ "folke/neoconf.nvim", cmd = "Neoconf", config = false, dependencies = { "nvim-lspconfig" } },
-			{ "folke/neodev.nvim", opts = {} },
+			{ "folke/neoconf.nvim", cmd = "Neoconf" },
+			"folke/lazydev.nvim",
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
 			{
@@ -64,12 +64,19 @@ return {
 			},
 			-- Enable this to show formatters used in a notification
 			-- Useful for debugging formatter issues
-			format_notify = false,
+			format_notify = true,
 			-- LSP Server Settings
 			---@type lspconfig.options
 			---@diagnostic disable: missing-fields
 			servers = {
-				-- jsonls = {},
+				jsonls = {
+					settings = {
+						json = {
+							format = { enable = true },
+							validate = { enable = true },
+						},
+					},
+				},
 				lua_ls = {
 					settings = {
 						Lua = {
@@ -100,7 +107,7 @@ return {
 				require("rafi.plugins.lsp.keymaps").on_attach(client, buffer)
 				require("rafi.plugins.lsp.highlight").on_attach(client, buffer)
 
-				if vim.diagnostic.is_disabled() or vim.bo[buffer].buftype ~= "" then
+				if not vim.diagnostic.is_enabled() or vim.bo[buffer].buftype ~= "" then
 					vim.diagnostic.disable(buffer)
 					return
 				end
@@ -190,11 +197,12 @@ return {
 				require("lspconfig")[server_name].setup(server_opts)
 			end
 
-			-- Get all the servers that are available thourgh mason-lspconfig
+			-- Get all the servers that are available through mason-lspconfig
 			local have_mason, mlsp = pcall(require, "mason-lspconfig")
 			local all_mslp_servers = {}
 			if have_mason then
-				all_mslp_servers = vim.tbl_keys(require("mason-lspconfig.mappings.server").lspconfig_to_package)
+				local result = mlsp.get_mappings()
+				all_mslp_servers = vim.tbl_keys(result.lspconfig_to_package)
 			end
 
 			local ensure_installed = {} ---@type string[]
@@ -234,6 +242,11 @@ return {
 			ensure_installed = {},
 			ui = {
 				border = "rounded",
+			},
+			icons = {
+				package_installed = "✓",
+				package_pending = "➜",
+				package_uninstalled = "✗",
 			},
 		},
 		---@param opts MasonSettings | {ensure_installed: string[]}

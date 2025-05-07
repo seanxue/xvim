@@ -146,7 +146,7 @@ return {
 	},
 
 	{
-		"jose-elias-alvarez/null-ls.nvim",
+		"nvimtools/none-ls.nvim",
 		optional = true,
 		opts = function(_, opts)
 			local nls = require("null-ls")
@@ -154,7 +154,7 @@ return {
 				nls.builtins.code_actions.gomodifytags,
 				nls.builtins.code_actions.impl,
 				nls.builtins.formatting.gofumpt,
-				-- nls.builtins.formatting.goimports_reviser,
+				nls.builtins.formatting.goimports_reviser,
 			}
 			opts.sources = opts.sources or {}
 			for _, source in ipairs(sources) do

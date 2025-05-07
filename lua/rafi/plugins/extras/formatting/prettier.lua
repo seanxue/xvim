@@ -26,7 +26,7 @@ return {
 	},
 
 	{
-		'jose-elias-alvarez/null-ls.nvim',
+		'nvimtools/none-ls.nvim',
 		optional = true,
 		opts = function(_, opts)
 			opts.sources = opts.sources or {}

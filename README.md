@@ -750,8 +750,8 @@ Spec: `rafi.plugins.extras.diagnostics.<name>`
 
 | Name         | Description                                  |
 | ------------ | -------------------------------------------- |
-| `proselint`  | proselint: null-ls source and mason package  |
-| `write-good` | write-good: null-ls source and mason package |
+| `proselint`  | proselint: none-ls source and mason package  |
+| `write-good` | write-good: none-ls source and mason package |
 
 ### Extra Plugins: Editor
 
@@ -770,7 +770,7 @@ Spec: `rafi.plugins.extras.formatting.<name>`
 
 | Name       | Description                                |
 | ---------- | ------------------------------------------ |
-| `prettier` | prettier: null-ls source and mason package |
+| `prettier` | prettier: none-ls source and mason package |
 
 ### Extra Plugins: Lang
 
@@ -800,7 +800,7 @@ Spec: `rafi.plugins.extras.lsp.<name>`
 | `gtd`            | [hrsh7th/nvim-gtd]                | LSP's go-to definition plugin                        |
 | `inlayhints`     | [lvimuser/lsp-inlayhints.nvim]    | Partial implementation of LSP inlay hint             |
 | `lightbulb`      | [kosayoda/nvim-lightbulb]         | VSCode 💡 for neovim's built-in LSP                  |
-| `null-ls`        | [jose-elias-alvarez/null-ls.nvim] | Inject LSP diagnostics, code actions, and more       |
+| `none-ls`        | [nvimtools/none-ls.nvim] | Inject LSP diagnostics, code actions, and more       |
 | `yaml-companion` | [yaml-companion.nvim]             | Get, set and autodetect YAML schemas in your buffers |
 
 ### Extra Plugins: Org
@@ -856,7 +856,7 @@ Spec: `rafi.plugins.extras.ui.<name>`
 [hrsh7th/nvim-gtd]: https://github.com/hrsh7th/nvim-gtd
 [lvimuser/lsp-inlayhints.nvim]: https://github.com/lvimuser/lsp-inlayhints.nvim
 [kosayoda/nvim-lightbulb]: https://github.com/kosayoda/nvim-lightbulb
-[jose-elias-alvarez/null-ls.nvim]: https://github.com/jose-elias-alvarez/null-ls.nvim
+[nvimtools/none-ls.nvim]: https://github.com/nvimtools/none-ls.nvim
 [yaml-companion.nvim]: https://github.com/someone-stole-my-name/yaml-companion.nvim
 [vimwiki/vimwiki]: https://github.com/vimwiki/vimwiki
 [Wansmer/treesj]: https://github.com/Wansmer/treesj
