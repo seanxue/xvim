@@ -11,7 +11,6 @@ return {
 	{ "lifepillar/pgsql.vim", ft = "pgsql" },
 	{ "MTDL9/vim-log-highlighting", ft = "log" },
 	{ "reasonml-editor/vim-reason-plus", ft = { "reason", "merlin" } },
-	{ "vmchale/just-vim", ft = "just" },
 
 	-----------------------------------------------------------------------------
 	{
@@ -183,7 +182,6 @@ return {
 				"php",
 				"pug",
 				"regex",
-				"ruby",
 				"rust",
 				"scala",
 				"scss",

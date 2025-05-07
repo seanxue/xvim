@@ -286,22 +286,16 @@ return {
 
 	-----------------------------------------------------------------------------
 	{
-		"hedyhli/outline.nvim",
-		lazy = true,
-		cmd = { "Outline", "OutlineOpen" },
+		"stevearc/aerial.nvim",
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter",
+			"nvim-tree/nvim-web-devicons",
+		},
 		keys = {
-			{ "<leader>o", "<cmd>Outline<CR>", desc = "Toggle outline" },
+			{ "<leader>o", "<cmd>AerialToggle!<CR>", desc = "Toggle Aerial" },
 		},
 		opts = {
-			outline_window = {
-				auto_jump = true,
-			},
-			symbol_folding = {
-				autofold_depth = 1,
-				auto_unfold = {
-					hovered = true,
-				},
-			},
+			close_automatic_events = { "unsupported" },
 		},
 	},
 
@@ -431,5 +425,13 @@ return {
 		keys = {
 			{ "ga", "<Plug>(EasyAlign)", mode = { "n", "x" }, desc = "start interactive EasyAlign" },
 		},
+	},
+
+	{
+		"RaafatTurki/hex.nvim",
+		cmd = { "HexDump", "HexAssemble", "HexToggle" },
+		config = function(_, _)
+			require("hex").setup()
+		end,
 	},
 }

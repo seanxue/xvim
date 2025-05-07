@@ -195,6 +195,12 @@ return {
 		opts = {},
 	},
 
+	{
+		"echasnovski/mini.icons",
+		event = "VeryLazy",
+		opts = {},
+	},
+
 	-----------------------------------------------------------------------------
 	{
 		"echasnovski/mini.surround",
