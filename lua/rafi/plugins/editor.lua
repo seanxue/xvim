@@ -1,6 +1,5 @@
 -- Plugins: Editor
 -- https://github.com/rafi/vim-config
-
 local is_windows = vim.loop.os_uname().sysname == "Windows_NT"
 
 return {
@@ -408,6 +407,27 @@ return {
 		keys = {
 			{ '<leader>bd', function() require('mini.bufremove').delete(0, false) end, desc = 'Delete Buffer', },
 		},
+		config = function(_, opts)
+			vim.api.nvim_create_autocmd("BufDelete", {
+				pattern = "*",
+				callback = function()
+					if vim.bo.filetype == "Neo-tree" then
+						vim.cmd("wincmd p") -- 若当前为 Neotree 窗口，则跳回上一个窗口
+					end
+				end,
+			})
+			vim.api.nvim_create_autocmd("BufEnter", {
+				pattern = "*",
+				callback = function()
+					local non_edit_wins = vim.tbl_filter(function(win)
+						return vim.bo[vim.api.nvim_win_get_buf(win)].filetype ~= "Neo-tree"
+					end, vim.api.nvim_list_wins())
+					if #non_edit_wins == 0 then
+						vim.cmd("q") -- 无其他窗口时退出 Neovim
+					end
+				end,
+			})
+		end,
 	},
 
 	-----------------------------------------------------------------------------

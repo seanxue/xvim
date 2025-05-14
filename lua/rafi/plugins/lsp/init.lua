@@ -65,27 +65,6 @@ return {
 			-- Enable this to show formatters used in a notification
 			-- Useful for debugging formatter issues
 			format_notify = true,
-			-- LSP Server Settings
-			---@type lspconfig.options
-			---@diagnostic disable: missing-fields
-			servers = {
-				jsonls = {
-					settings = {
-						json = {
-							format = { enable = true },
-							validate = { enable = true },
-						},
-					},
-				},
-				lua_ls = {
-					settings = {
-						Lua = {
-							workspace = { checkThirdParty = false },
-							completion = { callSnippet = "Replace" },
-						},
-					},
-				},
-			},
 			-- you can do any additional lsp server setup here
 			-- return true if you don't want this server to be setup with lspconfig
 			---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
@@ -195,6 +174,7 @@ return {
 					server_opts = vim.tbl_deep_extend("force", server_opts, user_config)
 				end
 				require("lspconfig")[server_name].setup(server_opts)
+				vim.notify(table.concat(server_opts, "\n"), vim.log.levels.ERROR, { title = "sean debug " .. server_name })
 			end
 
 			-- Get all the servers that are available through mason-lspconfig
@@ -220,12 +200,15 @@ return {
 			end
 
 			if have_mason then
+				vim.notify("have_mason", vim.log.levels.ERROR, { title = "sean debug" })
 				mlsp.setup({
 					ensure_installed = ensure_installed,
-					handlers = { make_config },
+					automatic_enable = true,
+					-- handlers = { make_config },
 				})
 			end
 
+			vim.notify(table.concat(ensure_installed, "\n"), vim.log.levels.ERROR, { title = "sean debug" })
 			-- Enable rounded borders in :LspInfo window.
 			require("lspconfig.ui.windows").default_options.border = "rounded"
 		end,
