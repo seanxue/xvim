@@ -37,7 +37,7 @@ venv:
 
 test:
 	$(info Testing for NVIM >= 0.8.0)
-	$(if $(shell nvim --version | egrep "NVIM v0\.([8-9]|10)\."),\
+	$(if $(shell nvim --version | grep -E "NVIM v0\.([8-9]|1[0-9])\."),\
 		$(info OK),\
 		$(error   .. You need Neovim 0.8.0 or newer))
 	@echo All tests passed, hooray!
