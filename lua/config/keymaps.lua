@@ -3,13 +3,13 @@
 
 local map = vim.keymap.set
 local unmap = function(modes, lhs)
-	modes = type(modes) == 'string' and { modes } or modes
-	lhs = type(lhs) == 'string' and { lhs } or lhs
-	for _, mode in pairs(modes) do
-		for _, l in pairs(lhs) do
-			pcall(vim.keymap.del, mode, l)
-		end
-	end
+  modes = type(modes) == "string" and { modes } or modes
+  lhs = type(lhs) == "string" and { lhs } or lhs
+  for _, mode in pairs(modes) do
+    for _, l in pairs(lhs) do
+      pcall(vim.keymap.del, mode, l)
+    end
+  end
 end
 
 -- stylua: ignore start
@@ -244,7 +244,7 @@ map({ 'n', 'x' }, '<BS>', '%', { remap = true, desc = 'Jump to Paren' })
 
 -- Toggle diff on all windows in current tab
 map('n', '<Leader>bf', function()
-	vim.cmd('windo diff' .. (vim.wo.diff and 'off' or 'this'))
+	vim.cmd('window diff' .. (vim.wo.diff and 'off' or 'this'))
 end, { desc = 'Diff Windows in Tab' })
 
 -- External diff
@@ -398,7 +398,7 @@ Snacks.toggle.zoom():map('sz')
 Snacks.toggle.zen():map('sZ')
 map('n', 'sx', function()
 	Snacks.bufdelete({ wipe = true })
-	vim.cmd.enew()
+	vim.cmd.new()
 end, { desc = 'Delete buffer and open new' })
 
 -- }}}
@@ -548,4 +548,4 @@ function _G.toggle_list(name) -- {{{
 	end
 end -- }}}
 
--- vim: set foldmethod=marker ts=2 sw=2 tw=80 noet :
+-- vim: set foldmethod=marker ts=2 sw=2 tw=80 note :

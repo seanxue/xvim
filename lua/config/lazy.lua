@@ -27,6 +27,8 @@ require("lazy").setup({
     { import = "plugins" },
   },
   defaults = { lazy = true, version = "*" },
+  install = { colorscheme = { "solarized" } },
+  checker = { enabled = true, notify = true },
   ui = {
     size = { width = 0.8, height = 0.85 },
     border = "rounded",
