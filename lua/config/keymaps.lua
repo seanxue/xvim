@@ -89,14 +89,6 @@ end, { expr = true, desc = 'Toggle Fold' })
 -- Focus the current fold by closing all others
 map('n', '<S-Return>', 'zMzv', { remap = true, desc = 'Focus Fold' })
 
--- Tabs: Many ways to navigate them
-map('n', '<A-j>', '<cmd>tabnext<CR>', { desc = 'Next Tab' })
-map('n', '<A-k>', '<cmd>tabprevious<CR>', { desc = 'Previous Tab' })
-map('n', '<A-[>', '<cmd>tabprevious<CR>', { desc = 'Previous Tab' })
-map('n', '<A-]>', '<cmd>tabnext<CR>', { desc = 'Next Tab' })
-map('n', '<C-Tab>', '<cmd>tabnext<CR>', { desc = 'Next Tab' })
-map('n', '<C-S-Tab>', '<cmd>tabprevious<CR>', { desc = 'Previous Tab' })
-
 -- Moving tabs
 map('n', '<A-{>', '<cmd>-tabmove<CR>', { desc = 'Tab Move Backwards' })
 map('n', '<A-}>', '<cmd>+tabmove<CR>', { desc = 'Tab Move Forwards' })
@@ -244,7 +236,7 @@ map({ 'n', 'x' }, '<BS>', '%', { remap = true, desc = 'Jump to Paren' })
 
 -- Toggle diff on all windows in current tab
 map('n', '<Leader>bf', function()
-	vim.cmd('window diff' .. (vim.wo.diff and 'off' or 'this'))
+	vim.cmd('windo diff' .. (vim.wo.diff and 'off' or 'this'))
 end, { desc = 'Diff Windows in Tab' })
 
 -- External diff
@@ -547,5 +539,3 @@ function _G.toggle_list(name) -- {{{
 		vim.cmd([[ botright copen ]])
 	end
 end -- }}}
-
--- vim: set foldmethod=marker ts=2 sw=2 tw=80 note :
