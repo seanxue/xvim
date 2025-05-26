@@ -387,6 +387,14 @@ return {
           layout_config = { width = 0.3, height = 0.4 },
         },
       }
+      opts.extensions = {
+        workspaces = {
+          -- keep insert mode after selection in the picker, default is false
+          keep_insert = true,
+          -- Highlight group used for the path in the picker, default is "String"
+          path_hl = "String",
+        },
+      }
 
       return opts
     end,

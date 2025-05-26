@@ -27,14 +27,15 @@ return {
     },
   },
 
+  {
+    "xzbdmw/colorful-menu.nvim",
+  },
   -----------------------------------------------------------------------------
   -- Replaces the UI for messages, cmdline and the popupmenu
   -- NOTE: This extends
   -- $XDG_DATA_HOME/nvim/lazy/LazyVim/lua/lazyvim/plugins/ui.lua
   {
     "noice.nvim",
-    enabled = not vim.g.started_by_firenvim,
-    ---@type NoiceConfig
     opts = {
       lsp = {
         override = {

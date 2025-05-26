@@ -24,6 +24,48 @@ return {
     },
   },
 
+  {
+    "which-key.nvim",
+    keys = {
+      -- Replace <leader>? with <leader>bk
+      { "<leader>?", false },
+      {
+        "<leader>bk",
+        function()
+          require("which-key").show({ global = false })
+        end,
+        desc = "Buffer Keymaps (which-key)",
+      },
+    },
+		-- stylua: ignore
+		opts = {
+			icons = {
+				breadcrumb = '»',
+				separator = '󰁔  ', -- ➜
+			},
+			delay = function(ctx)
+				return ctx.plugin and 0 or 400
+			end,
+      spec = {
+        {
+          { 'gs', group = nil },
+          { 'gz', group = 'surround', icon = { icon = '󱞹 ', color = 'cyan' } },
+          { ';d', group = 'lsp' },
+          { ';',  group = 'picker' },
+          { '<leader>cl', group = 'calls' },
+          { '<leader>ci', group = 'info' },
+          { '<leader>fw', group = 'workspace' },
+          { '<leader>ght', group = 'toggle' },
+          { '<leader>ht', group = 'toggle' },
+          { '<leader>m',  group = 'tools', icon = { icon = '󱁤 ', color = 'blue' } },
+          { '<leader>md', group = 'diff', icon = { icon = ' ', color = 'green' } },
+          { '<leader>z', group = 'notes' },
+          { '<leader>w', group = nil },
+        },
+      },
+		},
+  },
+
   -----------------------------------------------------------------------------
   -- Simple lua plugin for automated session management
   -- NOTE: This extends
