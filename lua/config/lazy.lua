@@ -1,5 +1,7 @@
 -- lazy.nvim initialization
 
+-- print("seanxue initialization lazyvim")
+
 -- Clone lazy.nvim if not already installed.
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 vim.uv = vim.uv or vim.loop
@@ -18,6 +20,8 @@ if not vim.uv.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+vim.g.lazyvim_check_order = false
+
 -- Start lazy.nvim plugin manager.
 require("lazy").setup({
   spec = {
@@ -25,10 +29,11 @@ require("lazy").setup({
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
     -- import/override with your plugins
     { import = "plugins" },
+    { import = "plugins.extras.lang" },
   },
   defaults = { lazy = true, version = "*" },
   install = { colorscheme = { "solarized" } },
-  checker = { enabled = true, notify = true },
+  checker = { enabled = true, notify = false },
   ui = {
     size = { width = 0.8, height = 0.85 },
     border = "rounded",
