@@ -1,8 +1,13 @@
+-- print("seanxue loading " .. vim.fn.expand("%:h"))
+
 return {
-  {
-    "nvim-treesitter/nvim-treesitter",
-    opts = { ensure_installed = { "go", "gomod", "gosum", "gotmpl", "gowork" } },
-  },
+  desc = "Imports Go lang extras and adds more tools.",
+  recommended = function()
+    return LazyVim.extras.wants({
+      ft = { "go", "gomod", "gowork", "gotmpl" },
+      root = { "go.work", "go.mod" },
+    })
+  end,
 
   {
     "neovim/nvim-lspconfig",
@@ -10,17 +15,25 @@ return {
       servers = {
         gopls = {
           settings = {
-            -- https://github.com/golang/tools/blob/master/gopls/doc/settings.md
             gopls = {
-              analyses = {
-                fieldalignment = false,
-                unusedvariable = true,
+              hints = {
+                assignVariableTypes = false,
+                compositeLiteralFields = false,
+                compositeLiteralTypes = false,
+                functionTypeParameters = false,
+                parameterNames = false,
+                rangeVariableTypes = false,
               },
             },
           },
         },
       },
     },
+  },
+
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = { ensure_installed = { "go", "gomod", "gosum", "gotmpl", "gowork" } },
   },
 
   {
