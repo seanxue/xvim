@@ -178,7 +178,7 @@ return {
   -- $XDG_DATA_HOME/nvim/lazy/LazyVim/lua/lazyvim/plugins/editor.lua
   {
     "todo-comments.nvim",
-    opts = { signs = false },
+    opts = { signs = true },
   },
 
   -----------------------------------------------------------------------------

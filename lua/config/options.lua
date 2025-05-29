@@ -17,7 +17,7 @@ opt.relativenumber = false
 
 opt.title = true
 opt.titlestring = "%<%F%=%l/%L - nvim"
-opt.textwidth = 80 -- Text width maximum chars before wrapping
+opt.textwidth = 120 -- Text width maximum chars before wrapping
 opt.mouse = "nv" -- Enable mouse in normal and visual modes only
 opt.spelloptions:append("camel")
 opt.shortmess:append({ W = true, I = true, c = true }) --  (default "ltToOCF")
