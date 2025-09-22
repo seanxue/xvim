@@ -17,7 +17,7 @@ update-repo:
 	git pull --ff --ff-only
 
 update-plugins:
-	nvim --headless -c 'TSUpdateSync' -c qa
+	nvim --headless -c 'TSUpdate' -c qa
 	@echo
 
 uninstall:

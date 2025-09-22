@@ -22,6 +22,29 @@ return {
     end,
   },
 
+  {
+    "nvim-treesitter/nvim-treesitter",
+    branch = "main",
+    lazy = false,
+    build = ":TSUpdate",
+    opts = {
+      ensure_installed = {
+        "go",
+        "gomod",
+        "gosum",
+        "gotmpl",
+        "gowork",
+        "c",
+        "lua",
+        "vim",
+        "vimdoc",
+        "query",
+        "markdown",
+        "markdown_inline",
+      },
+    },
+  },
+
   -----------------------------------------------------------------------------
   -- Code completion
   -- NOTE: This extends
@@ -123,7 +146,7 @@ return {
   -----------------------------------------------------------------------------
   -- Fast and feature-rich surround actions
   {
-    "echasnovski/mini.surround",
+    "nvim-mini/mini.surround",
     version = "*",
     opts = {
       mappings = {
@@ -159,7 +182,7 @@ return {
   -----------------------------------------------------------------------------
   -- Trailing whitespace highlight and remove
   {
-    "echasnovski/mini.trailspace",
+    "nvim-mini/mini.trailspace",
     event = { "BufReadPost", "BufNewFile" },
     -- stylua: ignore
     keys = {

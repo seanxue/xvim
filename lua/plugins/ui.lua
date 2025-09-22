@@ -85,6 +85,46 @@ return {
   -- $XDG_DATA_HOME/nvim/lazy/LazyVim/lua/lazyvim/plugins/util.lua
   {
     "folke/snacks.nvim",
+    priority = 1000,
+    lazy = false,
+    ---@type snacks.Config
+    opts = {
+      input = { enabled = true },
+      picker = {
+        enabled = true,
+        win = {
+          input = {
+            keys = {
+              ["jj"] = { "<esc>", expr = true, mode = "i" },
+              ["sv"] = "edit_split",
+              ["sg"] = "edit_vsplit",
+              ["st"] = "edit_tab",
+              ["."] = "toggle_hidden",
+              [","] = "toggle_ignored",
+              ["e"] = "qflist",
+              ["E"] = "loclist",
+              ["K"] = "select_and_prev",
+              ["J"] = "select_and_next",
+              ["*"] = "select_all",
+              ["<c-l>"] = { "preview_scroll_right", mode = { "i", "n" } },
+              ["<c-h>"] = { "preview_scroll_left", mode = { "i", "n" } },
+            },
+          },
+          list = {
+            keys = {
+              ["<c-l>"] = "preview_scroll_right",
+              ["<c-h>"] = "preview_scroll_left",
+            },
+          },
+          preview = {
+            keys = {
+              ["<c-h>"] = "focus_input",
+              ["<c-l>"] = "cycle_win",
+            },
+          },
+        },
+      },
+    },
     keys = {
       {
         "<leader><localleader>",
@@ -131,41 +171,6 @@ return {
           Snacks.picker.files({ pattern = vim.fn.expand("<cword>") })
         end,
         desc = "Find File",
-      },
-    },
-    opts = {
-      picker = {
-        win = {
-          input = {
-            keys = {
-              ["jj"] = { "<esc>", expr = true, mode = "i" },
-              ["sv"] = "edit_split",
-              ["sg"] = "edit_vsplit",
-              ["st"] = "edit_tab",
-              ["."] = "toggle_hidden",
-              [","] = "toggle_ignored",
-              ["e"] = "qflist",
-              ["E"] = "loclist",
-              ["K"] = "select_and_prev",
-              ["J"] = "select_and_next",
-              ["*"] = "select_all",
-              ["<c-l>"] = { "preview_scroll_right", mode = { "i", "n" } },
-              ["<c-h>"] = { "preview_scroll_left", mode = { "i", "n" } },
-            },
-          },
-          list = {
-            keys = {
-              ["<c-l>"] = "preview_scroll_right",
-              ["<c-h>"] = "preview_scroll_left",
-            },
-          },
-          preview = {
-            keys = {
-              ["<c-h>"] = "focus_input",
-              ["<c-l>"] = "cycle_win",
-            },
-          },
-        },
       },
     },
   },

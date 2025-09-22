@@ -32,10 +32,6 @@ if not vim.g.vscode then
   opt.ttimeoutlen = 10 -- Faster timeout on key code sequence to complete.
 end
 
-if vim.fn.has("nvim-0.11") == 1 then
-  opt.tabclose:append({ "uselast" })
-end
-
 -- What to save for views and sessions
 opt.sessionoptions:remove({ "blank", "buffers", "terminal" })
 opt.sessionoptions:append({ "globals", "skiprtp" })

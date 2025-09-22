@@ -1,7 +1,5 @@
 -- lazy.nvim initialization
 
--- print("seanxue initialization lazyvim")
-
 -- Clone lazy.nvim if not already installed.
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 vim.uv = vim.uv or vim.loop

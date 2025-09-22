@@ -13,14 +13,13 @@ return {
   build = "make",
   dependencies = {
     "nvim-treesitter/nvim-treesitter",
-    "stevearc/dressing.nvim",
     "nvim-lua/plenary.nvim",
     "MunifTanjim/nui.nvim",
     --- The below dependencies are optional,
-    "echasnovski/mini.pick", -- for file_selector provider mini.pick
+    "nvim-mini/mini.pick", -- for file_selector provider mini.pick
     "nvim-telescope/telescope.nvim", -- for file_selector provider telescope
     "ibhagwan/fzf-lua",
-    "echasnovski/mini.icons",
+    "nvim-mini/mini.icons",
     "zbirenbaum/copilot.lua", -- for providers='copilot'
     {
       -- support for image pasting

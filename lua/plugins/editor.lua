@@ -10,20 +10,6 @@ return {
   -- An alternative sudo for Vim and Neovim
   { "lambdalisue/suda.vim", event = "BufRead" },
 
-  -----------------------------------------------------------------------------
-  -- FZF picker
-  -- NOTE: This extends
-  -- $XDG_DATA_HOME/nvim/lazy/LazyVim/lua/lazyvim/plugins/extras/editor/fzf.lua
-  {
-    "fzf-lua",
-    optional = true,
-    opts = {
-      defaults = {
-        git_icons = has_git,
-      },
-    },
-  },
-
   {
     "which-key.nvim",
     keys = {

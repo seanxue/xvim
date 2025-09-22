@@ -123,7 +123,8 @@ return {
   -- $XDG_DATA_HOME/nvim/lazy/LazyVim/lua/lazyvim/plugins/extras/editor/telescope.lua
   {
     "telescope.nvim",
-    tag = "0.1.8",
+    -- tag = "0.1.8",
+    version = false,
     cmd = "Telescope",
 		-- stylua: ignore
 		keys = {
