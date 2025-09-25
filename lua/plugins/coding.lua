@@ -39,6 +39,8 @@ return {
         "vim",
         "vimdoc",
         "query",
+        "python",
+        "shell",
         "markdown",
         "markdown_inline",
       },

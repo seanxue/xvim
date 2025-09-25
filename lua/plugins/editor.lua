@@ -1,5 +1,4 @@
 -- Plugins: Editor
-local has_git = vim.fn.executable("git") == 1
 
 return {
 
