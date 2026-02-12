@@ -269,7 +269,7 @@ map('n', '<leader>xq', function() toggle_list('quickfix') end, { desc = 'Toggle 
 map('n', '<Leader>ce', vim.diagnostic.open_float, { desc = 'Line Diagnostics' })
 
 -- Set locations with diagnostics and open the list.
-map('n', '<Leader>a', function()
+map('n', '<Leader>x', function()
 	if vim.bo.filetype ~= 'qf' then
 		vim.diagnostic.setloclist({ open = false })
 	end

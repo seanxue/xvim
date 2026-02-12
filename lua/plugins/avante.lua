@@ -4,9 +4,12 @@ return {
   event = "VeryLazy",
   version = false, -- Never set this value to "*"! Never!
   opts = {
+    provider = "ollama",
     providers = {
-      aihubmix = {
-        model = "claude-3-7-sonnet-20250219",
+      ollama = {
+        endpoint = "http://tmeaicoding.tmeoa.com/client/",
+        model = "unclemusclez/jina-embeddings-v2-base-code",
+        timeout = 30000,
       },
     },
   },
