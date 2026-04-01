@@ -56,4 +56,18 @@ return {
       },
     },
   },
+
+  -----------------------------------------------------------------------------
+  -- Auto-install and auto-update Mason tools
+  {
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
+    dependencies = { "mason-org/mason.nvim" },
+    cmd = { "MasonToolsInstall", "MasonToolsUpdate", "MasonToolsClean" },
+    opts = {
+      -- Add tools you want auto-installed here, e.g.:
+      -- ensure_installed = { "stylua", "shfmt", "shellcheck" },
+      auto_update = false,
+      run_on_start = false,
+    },
+  },
 }

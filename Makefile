@@ -6,7 +6,7 @@ XDG_STATE_HOME  ?= $(XDG_DATA_HOME)
 
 default: install
 install: create-dirs update-plugins
-update: update-repo update-plugins
+update: update-repo update-plugins update-mason upgrade-mason-tools
 
 create-dirs:
 	@mkdir -v  ./spell
@@ -18,6 +18,14 @@ update-repo:
 
 update-plugins:
 	nvim --headless -c 'TSUpdate' -c qa
+	@echo
+
+update-mason:
+	nvim --headless -c 'MasonUpdate' -c 'sleep 5' -c qa
+	@echo
+
+upgrade-mason-tools:
+	nvim --headless -c 'MasonToolsUpdate' -c 'sleep 60' -c qa
 	@echo
 
 uninstall:
@@ -42,4 +50,4 @@ test:
 		$(error   .. You need Neovim 0.8.0 or newer))
 	@echo All tests passed, hooray!
 
-.PHONY: install update create-dirs update-repo update-plugins uninstall venv test
+.PHONY: install update create-dirs update-repo update-plugins update-mason upgrade-mason-tools uninstall venv test
