@@ -146,6 +146,7 @@ return {
   -- $XDG_DATA_HOME/nvim/lazy/LazyVim/lua/lazyvim/plugins/editor.lua
   {
     "trouble.nvim",
+    version = false,
 		-- stylua: ignore
 		keys = {
 			{ '<leader>cs', false },

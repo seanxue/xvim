@@ -518,8 +518,14 @@ function _G.toggle_list(name) -- {{{
 	end
 
 	if name == 'loclist' then
-		vim.cmd([[ botright lopen ]])
+		local ok, err = pcall(vim.cmd, 'botright lopen')
+		if not ok then
+			vim.notify(tostring(err):match('E%d+:.*') or tostring(err), vim.log.levels.WARN)
+		end
 	else
-		vim.cmd([[ botright copen ]])
+		local ok, err = pcall(vim.cmd, 'botright copen')
+		if not ok then
+			vim.notify(tostring(err):match('E%d+:.*') or tostring(err), vim.log.levels.WARN)
+		end
 	end
 end -- }}}

@@ -51,8 +51,7 @@ return {
         "lua_ls",
       },
       automatic_enable = {
-        "lua_ls",
-        "vimls",
+        exclude = { "golangci_lint_ls" },
       },
     },
   },
